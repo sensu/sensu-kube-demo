@@ -33,10 +33,19 @@
 
    ```
    $ kubectl create -f classic/ingress-nginx/ingress/sensu-enterprise.yaml
+
    $ kubectl create -f go/ingress-nginx/ingress/sensu-go.yaml
    ```
 
-6. Download and install the Sensu CLI tool (sensuctl)
+6. __Deploy kube-state-metrics__
+
+   ```
+   $ git clone git@github.com:kubernetes/kube-state-metrics.git
+
+   $ kubectl apply -f kube-state-metrics/kubernetes
+   ```
+
+7. __Download and install the Sensu CLI tool (sensuctl)__
 
    **On macOS**
 
