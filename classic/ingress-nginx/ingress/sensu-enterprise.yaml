@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sensu-enterprise
+spec:
+  rules:
+  - host: sensu-enterprise.local
+    http:
+      paths:
+      - backend:
+          serviceName: sensu-enterprise
+          servicePort: 4567
+  - host: dashboard.sensu-enterprise.local
+    http:
+      paths:
+      - backend:
+          serviceName: sensu-enterprise-dashboard
+          servicePort: 3000

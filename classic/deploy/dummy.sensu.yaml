@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dummy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: dummy
+      labels:
+        app: dummy
+    spec:
+      volumes:
+      - name: sensu-client-config
+        configMap:
+          name: sensu-client-config
+      containers:
+      - name: dummy
+        image: portertech/dummy:1.2.0
+        ports:
+        - protocol: TCP
+          containerPort: 8080
+      - name: sensu-client
+        image: sensu/sensu-classic:1.5.0-1
+        env:
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: SENSU_TRANSPORT_NAME
+          value: "redis"
+        - name: REDIS_URL
+          value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+        - name: SENSU_CLIENT_SUBSCRIPTIONS
+          value: "sidecar,dummy"
+        volumeMounts:
+        - name: sensu-client-config
+          mountPath: /etc/sensu/conf.d/
+        ports:
+        - containerPort: 3030
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy
+spec:
+  selector:
+    app: dummy
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080

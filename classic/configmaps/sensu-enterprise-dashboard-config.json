@@ -1,0 +1,13 @@
+{
+    "sensu": [
+        {
+            "name": "sensu-enterprise",
+            "host": "sensu-enterprise.default.svc.cluster.local",
+            "port": 4567
+        }
+    ],
+    "dashboard": {
+        "host": "0.0.0.0",
+        "port": 3000
+    }
+}

@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sensu-enterprise
+  labels:
+    app: sensu-enterprise
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensu-enterprise
+  template:
+    metadata:
+      labels:
+        app: sensu-enterprise
+    spec:
+      volumes:
+        - name: sensu-enterprise-config
+          configMap:
+            name: sensu-enterprise-config
+      containers:
+        - name: sensu-enterprise
+          image: sensu/sensu-classic-enterprise:3.2.2-1 # Private image - request access
+          env:
+            - name: SENSU_TRANSPORT_NAME
+              value: "redis"
+            - name: SENSU_API_PORT
+              value: "4567"
+            - name: REDIS_URL
+              value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+          volumeMounts:
+            - name: sensu-enterprise-config
+              mountPath: /etc/sensu/conf.d/
+          ports:
+            - containerPort: 4567
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4567
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 4567
+            initialDelaySeconds: 10
+            periodSeconds: 60
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sensu-enterprise
+spec:
+  selector:
+    app: sensu-enterprise
+  ports:
+    - name: api
+      protocol: TCP
+      port: 4567
+      targetPort: 4567

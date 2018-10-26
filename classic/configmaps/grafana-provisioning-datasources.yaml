@@ -1,0 +1,27 @@
+apiVersion: 1
+
+deleteDatasources:
+- name: Sensu
+  orgId: 1
+- name: InfluxDB
+  orgId: 1
+
+datasources:
+- name: Sensu
+  type: briangann-sensu-datasource
+  access: proxy
+  orgId: 1
+  url: http://sensu-enterprise.default.svc.cluster.local:4567
+  isDefault: true
+  version: 1
+  editable: true
+- name: InfluxDB
+  type: influxdb
+  access: proxy
+  orgId: 1
+  url: http://influxdb.default.svc.cluster.local:8086
+  database: sensu
+  user: sensu
+  password: password
+  version: 1
+  editable: true

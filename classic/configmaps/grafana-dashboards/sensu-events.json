@@ -1,0 +1,751 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "$$hashKey": "object:206",
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 3,
+    "iteration": 1539967960492,
+    "links": [],
+    "panels": [
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": "$Environment",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 6,
+                "x": 0,
+                "y": 0
+            },
+            "id": 5,
+            "interval": null,
+            "links": [
+                {
+                    "targetBlank": true,
+                    "type": "absolute",
+                    "url": "http://dashboard.sensu-enterprise.local/#/silenced?dc=$Environment"
+                }
+            ],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": true,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "aggregateMode": "list",
+                    "clientQueryMode": "count",
+                    "dimensions": [],
+                    "dsType": "influxdb",
+                    "eventMetricMode": "checks_silenced_count",
+                    "filters": [],
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "sourceType": "event_metrics",
+                    "tags": []
+                }
+            ],
+            "thresholds": "-3,-1",
+            "title": "Checks Silenced",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": "$Environment",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 6,
+                "x": 6,
+                "y": 0
+            },
+            "id": 1,
+            "interval": null,
+            "links": [
+                {
+                    "targetBlank": true,
+                    "type": "absolute",
+                    "url": "http://dashboard.sensu-enterprise.local/#/clients?status=1&dc=$Environment"
+                }
+            ],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": true,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "aggregateMode": "list",
+                    "clientQueryMode": "count",
+                    "dimensions": [],
+                    "dsType": "influxdb",
+                    "eventMetricMode": "warning_count",
+                    "filters": [],
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "sourceType": "event_metrics",
+                    "tags": []
+                }
+            ],
+            "thresholds": "-1,10000000",
+            "title": "WARNING",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+            ],
+            "datasource": "$Environment",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 6,
+                "x": 12,
+                "y": 0
+            },
+            "id": 2,
+            "interval": null,
+            "links": [
+                {
+                    "dashboard": "http://dashboard.sensu-enterprise.local/#/clients?status=2&dc=$Environment",
+                    "targetBlank": true,
+                    "type": "dashboard"
+                }
+            ],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": true,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "aggregateMode": "list",
+                    "clientQueryMode": "count",
+                    "dimensions": [],
+                    "dsType": "influxdb",
+                    "eventMetricMode": "critical_active_count",
+                    "filters": [],
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "sourceType": "event_metrics",
+                    "tags": []
+                }
+            ],
+            "thresholds": "-3,-1",
+            "title": "CRITICAL",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(93, 88, 88, 0.9)"
+            ],
+            "datasource": "$Environment",
+            "format": "none",
+            "gauge": {
+                "maxValue": 100,
+                "minValue": 0,
+                "show": false,
+                "thresholdLabels": false,
+                "thresholdMarkers": true
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 6,
+                "x": 18,
+                "y": 0
+            },
+            "id": 3,
+            "interval": null,
+            "links": [
+                {
+                    "targetBlank": true,
+                    "type": "absolute",
+                    "url": "http://dashboard.sensu-enterprise.local/#/clients?status=3&dc=$Environment"
+                }
+            ],
+            "mappingType": 1,
+            "mappingTypes": [
+                {
+                    "name": "value to text",
+                    "value": 1
+                },
+                {
+                    "name": "range to text",
+                    "value": 2
+                }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+                {
+                    "from": "null",
+                    "text": "N/A",
+                    "to": "null"
+                }
+            ],
+            "sparkline": {
+                "fillColor": "rgba(31, 118, 189, 0.18)",
+                "full": true,
+                "lineColor": "rgb(31, 120, 193)",
+                "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+                {
+                    "aggregateMode": "list",
+                    "clientQueryMode": "count",
+                    "dimensions": [],
+                    "dsType": "influxdb",
+                    "eventMetricMode": "unknown_active_count",
+                    "filters": [],
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "sourceType": "event_metrics",
+                    "tags": []
+                }
+            ],
+            "thresholds": "-3,-1",
+            "title": "UNKNOWN",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+                {
+                    "op": "=",
+                    "text": "N/A",
+                    "value": "null"
+                }
+            ],
+            "valueName": "avg"
+        },
+        {
+            "columns": [
+                {
+                    "text": "client.name",
+                    "value": "client.name"
+                },
+                {
+                    "text": "check_name",
+                    "value": "check_name"
+                },
+                {
+                    "text": "check.output",
+                    "value": "check.output"
+                },
+                {
+                    "text": "last_ok",
+                    "value": "last_ok"
+                },
+                {
+                    "text": "check.status",
+                    "value": "check.status"
+                }
+            ],
+            "datasource": "$Environment",
+            "fontSize": "100%",
+            "gridPos": {
+                "h": 19,
+                "w": 24,
+                "x": 0,
+                "y": 3
+            },
+            "id": 4,
+            "links": [
+                {
+                    "dashUri": "db/sensu-per-client-dashboard",
+                    "dashboard": "Sensu Per-Client Dashboard",
+                    "params": "&var-Environment=qlab06&var-Client=qatoamu162",
+                    "targetBlank": true,
+                    "title": "Sensu Per-Client Dashboard",
+                    "type": "dashboard"
+                }
+            ],
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+                "col": 4,
+                "desc": true
+            },
+            "styles": [
+                {
+                    "alias": "Status",
+                    "colorMode": "row",
+                    "colors": [
+                        "rgba(50, 172, 45, 0.97)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(245, 54, 54, 0.9)"
+                    ],
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "decimals": 0,
+                    "link": true,
+                    "linkTargetBlank": true,
+                    "linkTooltip": "View all checks for $__cell_0",
+                    "linkUrl": "http://grafana.local/dashboard/db/sensu-per-client-dashboard?orgId=1&var-Environment=$Environment&var-Client=$__cell_0",
+                    "pattern": "check.status",
+                    "thresholds": [
+                        "1",
+                        "2"
+                    ],
+                    "type": "number",
+                    "unit": "short"
+                },
+                {
+                    "alias": "Client",
+                    "colorMode": null,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "decimals": 2,
+                    "link": true,
+                    "linkTargetBlank": true,
+                    "linkTooltip": "View all checks for $__cell_0",
+                    "linkUrl": "http://grafana.local/dashboard/db/sensu-per-client-dashboard?orgId=1&var-Environment=$Environment&var-Client=$__cell_0",
+                    "pattern": "client.name",
+                    "thresholds": [],
+                    "type": "number",
+                    "unit": "short"
+                },
+                {
+                    "alias": "Check Name",
+                    "colorMode": null,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "decimals": 2,
+                    "link": true,
+                    "linkTargetBlank": true,
+                    "linkTooltip": "View all checks for $__cell_0",
+                    "linkUrl": "http://grafana.local/dashboard/db/sensu-per-client-dashboard?orgId=1&var-Environment=$Environment&var-Client=$__cell_0",
+                    "pattern": "check_name",
+                    "thresholds": [],
+                    "type": "number",
+                    "unit": "short"
+                },
+                {
+                    "alias": "Check Output",
+                    "colorMode": null,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "decimals": 2,
+                    "link": true,
+                    "linkTargetBlank": true,
+                    "linkTooltip": "View all checks for $__cell_0",
+                    "linkUrl": "http://grafana.local/dashboard/db/sensu-per-client-dashboard?orgId=1&var-Environment=$Environment&var-Client=$__cell_0",
+                    "pattern": "check.output",
+                    "preserveFormat": false,
+                    "sanitize": false,
+                    "thresholds": [],
+                    "type": "string",
+                    "unit": "short"
+                },
+                {
+                    "alias": "Last OK",
+                    "colorMode": null,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "decimals": 2,
+                    "link": true,
+                    "linkTargetBlank": true,
+                    "linkTooltip": "View all checks for $__cell_0",
+                    "linkUrl": "http://grafana.local/dashboard/db/sensu-per-client-dashboard?orgId=1&var-Environment=$Environment&var-Client=$__cell_0",
+                    "pattern": "last_ok",
+                    "thresholds": [],
+                    "type": "date",
+                    "unit": "short"
+                },
+                {
+                    "alias": "",
+                    "colorMode": null,
+                    "colors": [
+                        "rgba(245, 54, 54, 0.9)",
+                        "rgba(237, 129, 40, 0.89)",
+                        "rgba(50, 172, 45, 0.97)"
+                    ],
+                    "decimals": 2,
+                    "link": true,
+                    "linkTargetBlank": true,
+                    "linkTooltip": "View all checks for $__cell_0",
+                    "linkUrl": "http://grafana.local/dashboard/db/sensu-per-client-dashboard?orgId=1&var-Environment=$Environment&var-Client=$__cell_0",
+                    "pattern": "/.*/",
+                    "thresholds": [],
+                    "type": "number",
+                    "unit": "short"
+                }
+            ],
+            "targets": [
+                {
+                    "aggregateMode": "list",
+                    "clientQueryMode": "count",
+                    "dimensions": [],
+                    "eventMetricMode": "all_events_count",
+                    "filters": [],
+                    "hideSilencedEvents": true,
+                    "refId": "A",
+                    "sourceType": "events_json"
+                }
+            ],
+            "title": "Current Issues",
+            "transform": "json",
+            "type": "table"
+        }
+    ],
+    "schemaVersion": 16,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "text": "default",
+                    "value": "default"
+                },
+                "hide": 0,
+                "label": "Environment",
+                "name": "Environment",
+                "options": [],
+                "query": "briangann-sensu-datasource",
+                "refresh": 1,
+                "regex": "",
+                "type": "datasource"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-1m",
+        "to": "now"
+    },
+    "timepicker": {
+        "refresh_intervals": [
+            "5s",
+            "10s",
+            "30s",
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+        ],
+        "time_options": [
+            "5m",
+            "15m",
+            "1h",
+            "6h",
+            "12h",
+            "24h",
+            "2d",
+            "7d",
+            "30d"
+        ]
+    },
+    "timezone": "",
+    "title": "Sensu Events Dashboard",
+    "uid": "2dlMcvbmk",
+    "version": 1
+}

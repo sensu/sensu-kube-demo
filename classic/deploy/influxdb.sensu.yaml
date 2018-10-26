@@ -1,0 +1,72 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: influxdb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: influxdb
+      labels:
+        app: influxdb
+    spec:
+      volumes:
+        - name: influxdb-config
+          configMap:
+            name: influxdb-config
+        - name: sensu-client-config
+          configMap:
+            name: sensu-client-config
+      containers:
+        - name: influxdb
+          image: influxdb:1.5.3
+          ports:
+            - protocol: TCP
+              containerPort: 8086
+            - protocol: UDP
+              containerPort: 8089
+          volumeMounts:
+            - name: influxdb-config
+              mountPath: /etc/influxdb
+          env:
+            - name: INFLUXDB_DB
+              value: sensu
+            - name: INFLUXDB_USER
+              value: sensu
+            - name: INFLUXDB_USER_PASSWORD
+              value: password
+        - name: sensu-client
+          image: sensu/sensu-classic:1.5.0-1
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: SENSU_TRANSPORT_NAME
+              value: "redis"
+            - name: REDIS_URL
+              value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+            - name: SENSU_CLIENT_SUBSCRIPTIONS
+              value: "sidecar,influxdb"
+          volumeMounts:
+            - name: sensu-client-config
+              mountPath: /etc/sensu/conf.d/
+          ports:
+            - containerPort: 3030
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+spec:
+  selector:
+    app: influxdb
+  ports:
+    - name: api
+      protocol: TCP
+      port: 8086
+      targetPort: 8086
+    - name: udp
+      protocol: UDP
+      port: 8089
+      targetPort: 8089

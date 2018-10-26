@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: sensu-client
+  labels:
+    name: sensu-client
+spec:
+  template:
+    metadata:
+      labels:
+        name: sensu-client
+    spec:
+      hostPID: true
+      hostIPC: true
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      volumes:
+        - name: sensu-client-config
+          configMap:
+            name: sensu-client-config
+      containers:
+        - name: sensu-client
+          image: portertech/sensu-classic:daemonset
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: SENSU_CLIENT_NAME
+              value: "kube-node-$(HOST_IP)"
+            - name: SENSU_TRANSPORT_NAME
+              value: "redis"
+            - name: REDIS_URL
+              value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+            - name: SENSU_CLIENT_SUBSCRIPTIONS
+              value: "daemonset,roundrobin:daemonset"
+        volumeMounts:
+          - name: sensu-client-config
+            mountPath: /etc/sensu/conf.d/
+        ports:
+          - containerPort: 3030
+            hostPort: 3030
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 100Mi
