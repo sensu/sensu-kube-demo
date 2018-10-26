@@ -36,6 +36,40 @@
    $ kubectl create -f go/ingress-nginx/ingress/sensu-go.yaml
    ```
 
+6. Download and install the Sensu CLI tool (sensuctl)
+
+   **On macOS**
+
+   ```
+   $ latest=$(curl -s https://storage.googleapis.com/sensu-binaries/latest.txt)
+
+   $ curl -LO https://storage.googleapis.com/sensu-binaries/$latest/darwin/amd64/sensuctl
+
+   $ chmod +x sensuctl
+
+   $ sudo mv sensuctl /usr/local/bin/
+   ```
+
+   **On Debian/Ubuntu Linux**
+
+   ```
+   $ curl -s \
+   https://packagecloud.io/install/repositories/sensu/beta/script.deb.sh \
+   | sudo bash
+
+   $ sudo apt-get install sensu-cli
+   ```
+
+   **On RHEL/CentOS Linux**
+
+   ```
+   $ curl -s \
+   https://packagecloud.io/install/repositories/sensu/beta/script.rpm.sh \
+   | sudo bash
+
+   $ sudo yum install sensu-cli
+   ```
+
 ## Sensu Go Demo
 
 ### Deploy Application
