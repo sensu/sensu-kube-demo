@@ -1,0 +1,17 @@
+{
+    "type": "CheckConfig",
+    "spec": {
+        "name": "dummy-app-healthz",
+        "runtime_assets": [
+            "check-plugins"
+        ],
+        "command": "check-http -u http://localhost:8080/healthz",
+        "subscriptions":[
+            "dummy"
+        ],
+        "publish": true,
+        "interval": 10,
+        "organization": "acme",
+        "environment": "demo"
+    }
+}
