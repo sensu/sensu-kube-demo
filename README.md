@@ -260,36 +260,36 @@ In the Grafana WebUI (http://grafana.local), add the [InfluxDB data source](http
 
 ## Sensu Classic Demo
 
-    ```
-    $ kubectl create configmap sensu-enterprise-config --from-file=./classic/configmaps/sensu-enterprise-config.json
+   ```
+   $ kubectl create configmap sensu-enterprise-config --from-file=./classic/configmaps/sensu-enterprise-config.json
 
-    $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard-config.json
+   $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard-config.json
 
-    $ kubectl create configmap sensu-client-config --from-file=./classic/configmaps/sensu-client-config.json
+   $ kubectl create configmap sensu-client-config --from-file=./classic/configmaps/sensu-client-config.json
 
-    $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb.conf
+   $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb.conf
 
-    $ kubectl create configmap grafana-provisioning-datasources --from-file=./classic/configmaps/grafana-provisioning-datasources.yaml
+   $ kubectl create configmap grafana-provisioning-datasources --from-file=./classic/configmaps/grafana-provisioning-datasources.yaml
 
-    $ kubectl create configmap grafana-provisioning-dashboards --from-file=./classic/configmaps/grafana-provisioning-dashboards.yaml
+   $ kubectl create configmap grafana-provisioning-dashboards --from-file=./classic/configmaps/grafana-provisioning-dashboards.yaml
 
-    $ kubectl create configmap grafana-dashboards --from-file=./classic/configmaps/grafana-dashboards
-    ```
+   $ kubectl create configmap grafana-dashboards --from-file=./classic/configmaps/grafana-dashboards
+   ```
 
-    ```
-    $ kubectl apply -f classic/deploy/node-exporter-daemonset.yaml
+   ```
+   $ kubectl apply -f classic/deploy/node-exporter-daemonset.yaml
 
-    $ kubectl apply -f classic/deploy/sensu-redis.yaml
+   $ kubectl apply -f classic/deploy/sensu-redis.yaml
 
-    $ kubectl apply -f classic/deploy/sensu-enterprise.yaml
+   $ kubectl apply -f classic/deploy/sensu-enterprise.yaml
 
-    $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard.yaml
+   $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard.yaml
 
-    $ kubectl apply -f classic/deploy/influxdb.sensu.yaml
+   $ kubectl apply -f classic/deploy/influxdb.sensu.yaml
 
-    $ kubectl apply -f classic/deploy/grafana.yaml
+   $ kubectl apply -f classic/deploy/grafana.yaml
 
-    $ kubectl apply -f classic/deploy/sensu-client-daemonset.yaml
+   $ kubectl apply -f classic/deploy/sensu-client-daemonset.yaml
 
-    $ kubectl apply -f classic/deploy/dummy.sensu.yaml
-    ```
+   $ kubectl apply -f classic/deploy/dummy.sensu.yaml
+   ```
