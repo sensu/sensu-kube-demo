@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: sensu-demo
+  name: sensu-go
 spec:
   rules:
   - host: sensu.local
