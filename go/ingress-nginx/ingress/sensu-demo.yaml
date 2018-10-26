@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sensu-demo
+spec:
+  rules:
+  - host: sensu.local
+    http:
+      paths:
+      - backend:
+          serviceName: sensu-backend
+          servicePort: 8080
+  - host: webui.sensu.local
+    http:
+      paths:
+      - backend:
+          serviceName: sensu-backend
+          servicePort: 3000
+  - host: influxdb.local
+    http:
+      paths:
+      - backend:
+          serviceName: influxdb
+          servicePort: 8086
+  - host: grafana.local
+    http:
+      paths:
+      - backend:
+          serviceName: grafana
+          servicePort: 3001
+  - host: dummy.local
+    http:
+      paths:
+      - backend:
+          serviceName: dummy
+          servicePort: 8080

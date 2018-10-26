@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sensu-backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: sensu-backend
+      labels:
+        app: sensu-backend
+    spec:
+      containers:
+        - name: sensu-backend
+          image: portertech/sensu:demo
+          command: ["/opt/sensu/bin/sensu-backend", "start", "--log-level", "debug"]
+          ports:
+            - protocol: TCP
+              containerPort: 8080
+            - protocol: TCP
+              containerPort: 8081
+            - protocol: TCP
+              containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sensu-backend
+spec:
+  selector:
+    app: sensu-backend
+  ports:
+    - name: api
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: ws
+      protocol: TCP
+      port: 8081
+      targetPort: 8081
+    - name: webui
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
