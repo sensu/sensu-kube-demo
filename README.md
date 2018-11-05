@@ -245,7 +245,15 @@
 
 ### Deploy Grafana
 
-1. Deploy Grafana with a Sensu Agent sidecar
+1. Create Kubernetes ConfigMaps for Grafana configuration
+
+   ```
+   $ kubectl create configmap grafana-provisioning-datasources --from-file=./go/configmaps/grafana-provisioning-datasources.yaml
+
+   $ kubectl create configmap grafana-provisioning-dashboards --from-file=./go/configmaps/grafana-provisioning-dashboards.yaml
+   ```
+
+2. Deploy Grafana with a Sensu Agent sidecar
 
     ```
     $ kubectl create -f go/deploy/grafana.sensu.yaml
@@ -254,18 +262,6 @@
 
     $ sensuctl entity list
     ```
-
-### Grafana Data Source
-
-In the Grafana WebUI (http://grafana.local), add the [InfluxDB data source](http://docs.grafana.org/features/datasources/influxdb/).
-
-| Setting | Value |
-| --- | --- |
-| Type | InfluxDB |
-| URL | http://influxdb.default.svc.cluster.local:8086 |
-| Database | sensu |
-| User | sensu |
-| Password | password |
 
 ## Sensu Classic Demo
 
