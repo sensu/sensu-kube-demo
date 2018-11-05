@@ -10,6 +10,13 @@ spec:
       labels:
         app: grafana
     spec:
+      volumes:
+        - name: grafana-provisioning-datasources
+          configMap:
+            name: grafana-provisioning-datasources
+        - name: grafana-provisioning-dashboards
+          configMap:
+            name: grafana-provisioning-dashboards
       containers:
         - name: grafana
           image: grafana/grafana:5.1.3
@@ -19,6 +26,11 @@ spec:
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: password
+          volumeMounts:
+            - name: grafana-provisioning-datasources
+              mountPath: /etc/grafana/provisioning/datasources
+            - name: grafana-provisioning-dashboards
+              mountPath: /etc/grafana/provisioning/dashboards
         - name: sensu-agent
           image: sensu/sensu:2.0.0-beta.7
           command: ["/opt/sensu/bin/sensu-agent", "start", "--log-level", "debug"]
