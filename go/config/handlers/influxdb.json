@@ -3,7 +3,10 @@
     "spec": {
         "name": "influxdb",
         "type": "pipe",
-        "command": "/usr/bin/sensu-influxdb-handler -a 'http://influxdb.default.svc.cluster.local:8086' -d sensu -u sensu -p password",
+        "runtime_assets": [
+            "influxdb-handler"
+        ],
+        "command": "influxdb-handler -a 'http://influxdb.default.svc.cluster.local:8086' -d sensu -u sensu -p password",
         "timeout": 10,
         "filters": [
             "has_metrics"

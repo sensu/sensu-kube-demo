@@ -169,7 +169,17 @@
 
 ### Sensu InfluxDB Event Handler
 
-1. Create "influxdb" event handler for sending Sensu 2.0 metrics to InfluxDB
+1. Register a Sensu 2.0 Asset for influxdb handler
+
+   ```
+   $ cat go/config/assets/influxdb-handler.json
+
+   $ sensuctl create -f go/config/assets/influxdb-handler.json
+
+   $ sensuctl asset info influxdb-handler
+   ```
+
+2. Create "influxdb" event handler for sending Sensu 2.0 metrics to InfluxDB
 
    ```
    $ cat go/config/handlers/influxdb.json
@@ -196,8 +206,6 @@
 1. Register a Sensu 2.0 Asset for check plugins
 
    ```
-   $ cat go/config/assets/check-plugins.json
-
    $ sensuctl create -f go/config/assets/check-plugins.json
 
    $ sensuctl asset info check-plugins

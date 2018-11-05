@@ -17,7 +17,7 @@ spec:
             - protocol: TCP
               containerPort: 8080
         - name: sensu-agent
-          image: sensu/sensu:2.0.0-beta.3
+          image: sensu/sensu:2.0.0-beta.7
           command: ["/opt/sensu/bin/sensu-agent", "start", "--log-level", "debug"]
           env:
             - name: SENSU_BACKEND_URL
