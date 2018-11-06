@@ -11,6 +11,9 @@
         ],
         "publish": true,
         "interval": 10,
+        "handlers": [
+            "slack"
+        ],
         "organization": "acme",
         "environment": "demo"
     }
