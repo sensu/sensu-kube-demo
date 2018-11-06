@@ -1,0 +1,21 @@
+{
+    "type": "CheckConfig",
+    "spec": {
+        "name": "node-prometheus",
+        "runtime_assets": [
+            "prometheus-collector"
+        ],
+        "command": "sensu-prometheus-collector -exporter-url http://$HOST_IP:9100/metrics",
+        "subscriptions":[
+            "roundrobin:daemonset"
+        ],
+        "publish": true,
+        "interval": 10,
+        "output_metric_format": "influxdb_line",
+        "output_metric_handlers": [
+            "influxdb"
+        ],
+        "organization": "acme",
+        "environment": "demo"
+    }
+}
