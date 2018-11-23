@@ -26,16 +26,3 @@ spec:
               mountPath: /etc/sensu/dashboard.d
           ports:
             - containerPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sensu-enterprise-dashboard
-spec:
-  selector:
-    app: sensu-enterprise-dashboard
-  ports:
-    - name: dashboard
-      protocol: TCP
-      port: 3000
-      targetPort: 3000

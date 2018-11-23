@@ -1,21 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dummy
+  name: dummy-backend
 spec:
   replicas: 2
   template:
     metadata:
-      name: dummy
+      name: dummy-backend
       labels:
-        app: dummy
+        app: dummy-backend
     spec:
       volumes:
       - name: sensu-client-config
         configMap:
           name: sensu-client-config
       containers:
-      - name: dummy
+      - name: dummy-backend
         image: portertech/dummy:1.2.0
         ports:
         - protocol: TCP
@@ -38,16 +38,3 @@ spec:
           mountPath: /etc/sensu/conf.d/
         ports:
         - containerPort: 3030
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: dummy
-spec:
-  selector:
-    app: dummy
-  ports:
-  - name: http
-    protocol: TCP
-    port: 8080
-    targetPort: 8080
