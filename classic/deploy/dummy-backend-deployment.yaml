@@ -11,9 +11,9 @@ spec:
         app: dummy-backend
     spec:
       volumes:
-      - name: sensu-client-config
+      - name: sensu-client-defaults
         configMap:
-          name: sensu-client-config
+          name: sensu-client-defaults
       containers:
       - name: dummy-backend
         image: portertech/dummy:1.2.0
@@ -34,7 +34,7 @@ spec:
         - name: SENSU_CLIENT_SUBSCRIPTIONS
           value: "sidecar,dummy"
         volumeMounts:
-        - name: sensu-client-config
+        - name: sensu-client-defaults
           mountPath: /etc/sensu/conf.d/
         ports:
         - containerPort: 3030
