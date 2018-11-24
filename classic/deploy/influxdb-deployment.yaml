@@ -14,9 +14,9 @@ spec:
         - name: influxdb-config
           configMap:
             name: influxdb-config
-        - name: sensu-client-config
+        - name: sensu-client-defaults
           configMap:
-            name: sensu-client-config
+            name: sensu-client-defaults
       containers:
         - name: influxdb
           image: influxdb:1.5.3
@@ -49,7 +49,7 @@ spec:
             - name: SENSU_CLIENT_SUBSCRIPTIONS
               value: "sidecar,influxdb"
           volumeMounts:
-            - name: sensu-client-config
+            - name: sensu-client-defaults
               mountPath: /etc/sensu/conf.d/
           ports:
             - containerPort: 3030

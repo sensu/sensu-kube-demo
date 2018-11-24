@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sensu-enterprise-dashboard
+  labels:
+    app: sensu-enterprise-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensu-enterprise-dashboard
+  template:
+    metadata:
+      labels:
+        app: sensu-enterprise-dashboard
+    spec:
+      volumes:
+        - name: sensu-enterprise-dashboard-config
+          configMap:
+            name: sensu-enterprise-dashboard-config
+      containers:
+        - name: sensu-enterprise-dashboard
+          image: sensu/sensu-classic-enterprise-dashboard:2.12.0-1 # Private image - request access
+          volumeMounts:
+            - name: sensu-enterprise-dashboard-config
+              mountPath: /etc/sensu/dashboard.d
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: docker-hub-creds

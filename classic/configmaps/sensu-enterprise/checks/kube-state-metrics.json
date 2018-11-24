@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "kube-state-metrics": {
+      "type": "metric",
+      "command": "sensu-prometheus-collector -exporter-url http://kube-state-metrics.kube-system.svc.cluster.local:8080/metrics",
+      "subscribers": ["roundrobin:daemonset"],
+      "interval": 30,
+      "handler": "influxdb",
+      "output_format": "influxdb_line"
+    }
+  }
+}
