@@ -61,4 +61,4 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 60
       imagePullSecrets:
-        - name: docker-hub-creds
+        - name: docker-registry-creds

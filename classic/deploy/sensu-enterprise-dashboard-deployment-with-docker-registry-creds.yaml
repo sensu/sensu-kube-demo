@@ -27,4 +27,4 @@ spec:
           ports:
             - containerPort: 3000
       imagePullSecrets:
-        - name: docker-hub-creds
+        - name: docker-registry-creds
