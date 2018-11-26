@@ -21,10 +21,12 @@
    _NOTE: Google Kubernetes Engine (GKE) Users - GKE has strict role permissions
    that will prevent the kube-state-metrics roles and role bindings from being
    created. To work around this, you can give your GCP identity the
-   `cluster-admin` role by running the following one-liner:_
+   `cluster-admin` role by running the following one-liner (before deploying
+   `kube-state-metrics`; if you ran the above command and received an error, try
+   it again after granting your GCP identity `cluster-admin` privileges):_
 
    ```
-   kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud info | grep Account | cut -d '[' -f 2 | cut -d ']' -f 1)
+   $ kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud info | grep Account | cut -d '[' -f 2 | cut -d ']' -f 1)
    ```
 
 ## Sensu Classic Demo
