@@ -29,27 +29,6 @@
 
 ## Sensu Classic Demo
 
-1. Apply Sensu configuration as Kubernetes Configmaps
-
-   ```
-   $ kubectl create configmap sensu-enterprise-defaults --from-file=./classic/configmaps/sensu-enterprise/defaults/
-   $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/
-   $ kubectl create configmap sensu-enterprise-handlers --from-file=./classic/configmaps/sensu-enterprise/handlers/
-   $ kubectl create configmap sensu-enterprise-integrations --from-file=./classic/configmaps/sensu-enterprise/integrations/
-
-   $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard/dashboard.json
-
-   $ kubectl create configmap sensu-client-defaults --from-file=./classic/configmaps/sensu-client/defaults.json
-
-   $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb/influxdb.conf
-
-   $ kubectl create configmap grafana-provisioning-datasources --from-file=./classic/configmaps/grafana-provisioning-datasources.yaml
-   $ kubectl create configmap grafana-provisioning-dashboards --from-file=./classic/configmaps/grafana-provisioning-dashboards.yaml
-   $ kubectl create configmap grafana-dashboards --from-file=./classic/configmaps/grafana-dashboards
-   ```
-
-   TODO: fix DNS on kube-state-metrics.json (check config)
-
 1. Deploy Redis
 
    ```
@@ -94,21 +73,36 @@
 
    [sensu-classic-enterprise]: https://hub.docker.com/r/sensu/sensu-classic-enterprise/
 
-1. Deploy Sensu Enterprise and the Sensu Enterprise Dashboard
+1. Configure and deploy Sensu Enterprise and the Sensu Enterprise Dashboard
 
    ```
+   $ kubectl create configmap sensu-enterprise-defaults --from-file=./classic/configmaps/sensu-enterprise/defaults/
+   $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/
+   $ kubectl create configmap sensu-enterprise-handlers --from-file=./classic/configmaps/sensu-enterprise/handlers/
+   $ kubectl create configmap sensu-enterprise-integrations --from-file=./classic/configmaps/sensu-enterprise/integrations/
+   $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard/dashboard.json
+   $ kubectl create configmap sensu-client-defaults --from-file=./classic/configmaps/sensu-client/defaults.json
    $ kubectl apply -f classic/deploy/sensu-enterprise-service.yaml
    $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-service.yaml
    $ kubectl apply -f classic/deploy/sensu-enterprise-deployment.yaml
    $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-deployment.yaml
    ```
 
-1. Deploy InfluxDB and Grafana
+1. Configure and deploy InfluxDB
 
    ```
+   $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb/influxdb.conf
    $ kubectl apply -f classic/deploy/influxdb-service.yaml
-   $ kubectl apply -f classic/deploy/grafana-service.yaml
    $ kubectl apply -f classic/deploy/influxdb-deployment.yaml
+   ```
+
+1. Configure and deploy Grafana
+
+   ```
+   $ kubectl create configmap grafana-provisioning-datasources --from-file=./classic/configmaps/grafana/grafana-provisioning-datasources.yaml
+   $ kubectl create configmap grafana-provisioning-dashboards --from-file=./classic/configmaps/grafana/grafana-provisioning-dashboards.yaml
+   $ kubectl create configmap grafana-dashboards --from-file=./classic/configmaps/grafana/dashboards
+   $ kubectl apply -f classic/deploy/grafana-service.yaml
    $ kubectl apply -f classic/deploy/grafana-deployment.yaml
    ```
 
@@ -310,7 +304,7 @@
 3. Toggle the dummy app /healthz status
 
    ```
-   $ curl -iXPOST http://dummy.local/healthz
+   $ curl -i -XPOST http://dummy.local/healthz
 
    $ sensuctl event list
    ```
