@@ -2,47 +2,29 @@
 
 ## Prerequisites
 
-1. __[Install Docker for Mac (Edge)](https://store.docker.com/editions/community/docker-ce-desktop-mac)__
+- Kubernetes
+- A functional Kubernetes Ingress Controller (included with most hosted
+  Kubernetes offerings, such as GKE)
 
-2. __Enable Kubernetes (in the Docker for Mac preferences)__
+## Install Kube State Metrics
 
-<img src="https://github.com/sensu/sensu-kube-demo/raw/master/images/docker-kubernetes.png" width="600">
 
-3. __Deploy the [Kubernetes NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)__
 
-   ```
-   $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
-   ```
-
-   Then use the modified "ingress-nginx" Kubernetes Service definition (works with Docker for Mac):
-
-   ```
-   $ kubectl create -f classic/ingress-nginx/services/ingress-nginx.yaml
-   ```
-
-4. __Add hostnames to /etc/hosts__
-
-   ```
-   $ sudo vi /etc/hosts
-
-   127.0.0.1       sensu.local webui.sensu.local sensu-enterprise.local dashboard.sensu-enterprise.local
-   127.0.0.1       influxdb.local grafana.local dummy.local
-   ```
-
-5. __Create Kubernetes Ingress Resources__
-
-   ```
-   $ kubectl create -f classic/ingress-nginx/ingress/sensu-enterprise.yaml
-
-   $ kubectl create -f go/ingress-nginx/ingress/sensu-go.yaml
-   ```
-
-6. __Deploy kube-state-metrics__
+1. Deploy `kube-state-metrics`:
 
    ```
    $ git clone git@github.com:kubernetes/kube-state-metrics.git
 
    $ kubectl apply -f kube-state-metrics/kubernetes
+   ```
+
+   _NOTE: Google Kubernetes Engine (GKE) Users - GKE has strict role permissions
+   that will prevent the kube-state-metrics roles and role bindings from being
+   created. To work around this, you can give your GCP identity the
+   `cluster-admin` role by running the following one-liner:_
+
+   ```
+   kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud info | grep Account | cut -d '[' -f 2 | cut -d ']' -f 1)
    ```
 
 7. __Download and install the Sensu CLI tool (sensuctl)__
@@ -79,7 +61,7 @@
 
 ## Sensu Go Demo
 
-### Deploy Application
+### Deploy an Application
 
 1. Deploy dummy app pods
 
@@ -91,12 +73,12 @@
    $ curl -i http://dummy.local
    ```
 
-### Sensu Backend
+### Deploy the Sensu Backend
 
 1. Deploy Sensu Backend
 
    ```
-   $ kubectl create -f go/deploy/sensu-backend.yaml
+   $ kubectl apply -f go/deploy/sensu-backend.yaml
 
    $ kubectl get pods
    ```
@@ -150,13 +132,13 @@
 1. Create a Kubernetes ConfigMap for InfluxDB configuration
 
    ```
-   $ kubectl create configmap influxdb-config --from-file go/configmaps/influxdb.conf
+   $ kubectl apply configmap influxdb-config --from-file go/configmaps/influxdb.conf
    ```
 
 2. Deploy InfluxDB with a Sensu Agent sidecar
 
     ```
-    $ kubectl create -f go/deploy/influxdb.sensu.yaml
+    $ kubectl apply -f go/deploy/influxdb.sensu.yaml
 
     $ kubectl get pods
 
@@ -252,15 +234,15 @@
 1. Create Kubernetes ConfigMaps for Grafana configuration
 
    ```
-   $ kubectl create configmap grafana-provisioning-datasources --from-file=./go/configmaps/grafana-provisioning-datasources.yaml
+   $ kubectl apply configmap grafana-provisioning-datasources --from-file=./go/configmaps/grafana-provisioning-datasources.yaml
 
-   $ kubectl create configmap grafana-provisioning-dashboards --from-file=./go/configmaps/grafana-provisioning-dashboards.yaml
+   $ kubectl apply configmap grafana-provisioning-dashboards --from-file=./go/configmaps/grafana-provisioning-dashboards.yaml
    ```
 
 2. Deploy Grafana with a Sensu Agent sidecar
 
     ```
-    $ kubectl create -f go/deploy/grafana.sensu.yaml
+    $ kubectl apply -f go/deploy/grafana.sensu.yaml
 
     $ kubectl get pods
 
@@ -269,36 +251,104 @@
 
 ## Sensu Classic Demo
 
+1. Apply Sensu configuration as Kubernetes Configmaps
+
    ```
-   $ kubectl create configmap sensu-enterprise-config --from-file=./classic/configmaps/sensu-enterprise-config.json
+   $ kubectl create configmap sensu-enterprise-defaults --from-file=./classic/configmaps/sensu-enterprise/defaults/
+   $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/
+   $ kubectl create configmap sensu-enterprise-handlers --from-file=./classic/configmaps/sensu-enterprise/handlers/
+   $ kubectl create configmap sensu-enterprise-integrations --from-file=./classic/configmaps/sensu-enterprise/integrations/
 
-   $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard-config.json
+   $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard/dashboard.json
 
-   $ kubectl create configmap sensu-client-config --from-file=./classic/configmaps/sensu-client-config.json
+   $ kubectl create configmap sensu-client-defaults --from-file=./classic/configmaps/sensu-client/defaults.json
 
-   $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb.conf
+   $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb/influxdb.conf
 
    $ kubectl create configmap grafana-provisioning-datasources --from-file=./classic/configmaps/grafana-provisioning-datasources.yaml
-
    $ kubectl create configmap grafana-provisioning-dashboards --from-file=./classic/configmaps/grafana-provisioning-dashboards.yaml
-
    $ kubectl create configmap grafana-dashboards --from-file=./classic/configmaps/grafana-dashboards
    ```
 
+   TODO: fix DNS on kube-state-metrics.json (check config)
+
+1. Deploy Redis
+
+   ```
+   $ kubectl apply -f classic/deploy/sensu-redis-service.yaml
+   $ kubectl apply -f classic/deploy/sensu-redis-deployment.yaml
+   ```
+
+1. Configure your environment to access private Docker images.
+
+   The official Sensu Enterprise (classic) Docker images are only available from
+   a private repository on Docker Hub. Kubernetes either needs to be configured
+   to use private Docker Registry images, or a Docker image needs to be uploaded
+   to a Docker registry that is accessible via Kubernetes (e.g. such as Google
+   Container Registry for GKE users).
+
+   The Kubernetes Deployment definition in `classic/deploy/sensu-enterprise-deployment.yaml`
+   references a Private Docker image
+   ([https://hub.docker.com/r/sensu/sensu-classic-enterprise/][sensu-classic-enterprise]).
+
+   To configure Kubernetes to pull this image (or any other private images
+   hosted in a Docker container registry), create a Kubernetes secret as
+   follows:
+
+   ```
+   $ kubectl create secret docker-registry docker-registry-creds --docker-server=https://index.docker.io/v1/ --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+   ```
+
+   _NOTE: replace `<your-name`, `<your-pword>`, and `<your-email>` with your
+   Docker Hub username, password, and email address._
+
+   Edit the Kubernetes deployment to use the `docker-registry-creds` secret:
+
+   ```
+   spec:
+     containers:
+       - name: sensu-enterprise
+         image: sensu/sensu-classic-enterprise:3.2.2-1
+         ...: ...
+     imagePullSecrets:
+       - name: docker-registry-creds
+   ```
+
+   [sensu-classic-enterprise]: https://hub.docker.com/r/sensu/sensu-classic-enterprise/
+
+1. Deploy Sensu Enterprise and the Sensu Enterprise Dashboard
+
+   ```
+   $ kubectl apply -f classic/deploy/sensu-enterprise-service.yaml
+   $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-service.yaml
+   $ kubectl apply -f classic/deploy/sensu-enterprise-deployment.yaml
+   $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-deployment.yaml
+   ```
+
+1. Deploy InfluxDB and Grafana
+
+   ```
+   $ kubectl apply -f classic/deploy/influxdb-service.yaml
+   $ kubectl apply -f classic/deploy/grafana-service.yaml
+   $ kubectl apply -f classic/deploy/influxdb-deployment.yaml
+   $ kubectl apply -f classic/deploy/grafana-deployment.yaml
+   ```
+
+1. Deploy Prometheus Node Exporters
+
    ```
    $ kubectl apply -f classic/deploy/node-exporter-daemonset.yaml
+   ```
 
-   $ kubectl apply -f classic/deploy/sensu-redis.yaml
+1. Deploy Sensu Client daemonsets
 
-   $ kubectl apply -f classic/deploy/sensu-enterprise.yaml
-
-   $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard.yaml
-
-   $ kubectl apply -f classic/deploy/influxdb.sensu.yaml
-
-   $ kubectl apply -f classic/deploy/grafana.yaml
-
+   ```
    $ kubectl apply -f classic/deploy/sensu-client-daemonset.yaml
+   ```
 
-   $ kubectl apply -f classic/deploy/dummy.sensu.yaml
+1. Deploy an application
+
+   ```
+   $ kubectl apply -f classic/deploy/dummy-backend-service.yaml
+   $ kubectl apply -f classic/deploy/dummy-backend-deployment.yaml
    ```
