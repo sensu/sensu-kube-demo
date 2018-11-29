@@ -97,9 +97,9 @@
    -` appended on the end; for example:._
    >
    > ```
-     $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/ -o yaml --dry-run | kubectl replace -f -
-     ```
-     
+   > $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/ -o yaml --dry-run | kubectl replace -f -
+   > ```
+
 
 1. Configure and deploy InfluxDB
 
