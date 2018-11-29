@@ -99,6 +99,11 @@
    > ```
    > $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/ -o yaml --dry-run | kubectl replace -f -
    > ```
+   >
+   > _This instructs kubernetes to do a dry run (`--dry-run`) of the `create
+   > configmap` command and output the resulting yaml (`-o yaml`), which can be
+   > piped to `kubectl replace -f` using the bash `-` syntax (a synonym for
+   > `/dev/stdin`). 
 
 
 1. Configure and deploy InfluxDB
