@@ -73,6 +73,8 @@
        - name: docker-registry-creds
    ```
 
+   Reference: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
    [sensu-classic-enterprise]: https://hub.docker.com/r/sensu/sensu-classic-enterprise/
 
 1. Configure and deploy Sensu Enterprise and the Sensu Enterprise Dashboard
@@ -89,6 +91,15 @@
    $ kubectl apply -f classic/deploy/sensu-enterprise-deployment.yaml
    $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-deployment.yaml
    ```
+
+   > _PROTIP: to edit and replace, or add new configuration files to a configmap,
+   rerun any of the above commands with `-o yaml --dry-run | kubectl replace -f
+   -` appended on the end; for example:._
+   >
+   > ```
+     $ kubectl create configmap sensu-enterprise-checks --from-file=./classic/configmaps/sensu-enterprise/checks/ -o yaml --dry-run | kubectl replace -f -
+     ```
+     
 
 1. Configure and deploy InfluxDB
 
