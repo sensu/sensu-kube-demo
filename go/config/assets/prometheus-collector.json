@@ -1,9 +1,12 @@
 {
+    "api_version": "core/v2",
     "type": "Asset",
+    "metadata": {
+        "namespace": "demo",
+        "name": "prometheus-collector"
+    },
     "spec": {
-        "name": "prometheus-collector",
         "url": "https://github.com/sensu/sensu-prometheus-collector/releases/download/1.0.0/sensu-prometheus-collector.tar",
-        "sha512": "c1ec2f493f0ff9d83914e0a1bf3b2f6d424a51ffd9b5852d3dd04e592ebc56ab3d09635540677d6f78ea07138024f3d6a4f7f71e2cb744d7a565d4fa4077611c",
-        "organization": "acme"
+        "sha512": "c1ec2f493f0ff9d83914e0a1bf3b2f6d424a51ffd9b5852d3dd04e592ebc56ab3d09635540677d6f78ea07138024f3d6a4f7f71e2cb744d7a565d4fa4077611c"
     }
 }
