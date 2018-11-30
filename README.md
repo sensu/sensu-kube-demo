@@ -111,39 +111,35 @@
 
 ### Multitenancy
 
-1. Create "acme" organization
+1. Create "demo" namespace
 
    ```
-   $ sensuctl organization create acme
+   $ sensuctl namespace create demo
 
-   $ sensuctl config set-organization acme
+   $ sensuctl config set-namespace demo
    ```
 
-2. Create "demo" environment within the "acme" organization
+3. Create "dev" user role with full-access to the "demo" namespace
 
    ```
-   $ sensuctl environment create demo --interactive
-
-   $ sensuctl environment list
-
-   $ sensuctl config set-environment demo
+   $ sensuctl role create dev \
+   --verb get,list,create,update,delete \
+   --resource \* --namespace demo
    ```
 
-3. Create "dev" user role with full-access to the "demo" environment
+4. Create "dev" role binding for "dev" group
 
    ```
-   $ sensuctl role create dev -t '*' \
-   --create --delete --update --read \
-   --environment demo --organization acme
+   $ sensuctl role-binding create dev --role dev --group dev
    ```
 
-4. Create "demo" user with the "dev" role
+5. Create "demo" user that is a member of the "dev" group
 
    ```
    $ sensuctl user create demo --interactive
    ```
 
-5. Reconfigure `sensuctl` to use the "demo" user, "acme" organization", and "demo" environment
+6. Reconfigure `sensuctl` to use the "demo" user and "demo" namespace
 
    ```
    $ sensuctl configure

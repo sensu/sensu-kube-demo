@@ -1,7 +1,11 @@
 {
+    "api_version": "core/v2",
     "type": "CheckConfig",
+    "metadata": {
+        "namespace": "demo",
+        "name": "node-prometheus"
+    },
     "spec": {
-        "name": "node-prometheus",
         "runtime_assets": [
             "prometheus-collector"
         ],
@@ -14,8 +18,6 @@
         "output_metric_format": "influxdb_line",
         "output_metric_handlers": [
             "influxdb"
-        ],
-        "organization": "acme",
-        "environment": "demo"
+        ]
     }
 }

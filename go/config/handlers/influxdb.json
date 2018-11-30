@@ -1,7 +1,11 @@
 {
+    "api_version": "core/v2",
     "type": "Handler",
+    "metadata": {
+        "namespace": "demo",
+        "name": "influxdb"
+    },
     "spec": {
-        "name": "influxdb",
         "type": "pipe",
         "runtime_assets": [
             "influxdb-handler"
@@ -10,8 +14,6 @@
         "timeout": 10,
         "filters": [
             "has_metrics"
-        ],
-        "organization": "acme",
-        "environment": "demo"
+        ]
     }
 }

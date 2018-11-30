@@ -1,7 +1,11 @@
 {
+    "api_version": "core/v2",
     "type": "Handler",
+    "metadata": {
+        "namespace": "demo",
+        "name": "slack"
+    },
     "spec": {
-        "name": "slack",
         "type": "pipe",
         "runtime_assets": [
             "slack-handler"
@@ -10,8 +14,6 @@
         "timeout": 10,
         "filters": [
             "is_incident"
-        ],
-        "organization": "acme",
-        "environment": "demo"
+        ]
     }
 }
