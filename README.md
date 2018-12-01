@@ -116,6 +116,8 @@
    ```
    $ sensuctl namespace create demo
 
+   $ sensuctl namespace list
+
    $ sensuctl config set-namespace demo
    ```
 
