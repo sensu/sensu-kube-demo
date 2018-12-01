@@ -10,8 +10,8 @@
         "runtime_assets": [
             "slack-handler"
         ],
-        "command": "slack-handler --channel '#demo' --timeout 20 --username 'sensu' --webhook-url 'SECRET'",
-        "timeout": 10,
+        "command": "sensu-slack-handler --channel '#demo' --timeout 20 --username 'sensu' --webhook-url 'SECRET'",
+        "timeout": 30,
         "filters": [
             "is_incident"
         ]

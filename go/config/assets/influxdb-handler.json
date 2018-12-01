@@ -6,7 +6,7 @@
         "name": "influxdb-handler"
     },
     "spec": {
-        "url": "https://github.com/sensu/sensu-influxdb-handler/releases/download/v1.8/influxdb-handler_1.8_linux_amd64.tar.gz",
-        "sha512": "2b3ffb73351e81c048c33e14c6dad255ecf1ddadbbce65837957ef423d888e601d090cf31160362a64b635d5ae14925578801083965e4231a014a3874a38a8c6"
+        "url": "https://github.com/sensu/sensu-influxdb-handler/releases/download/3.0.0/sensu-influxdb-handler_3.0.0_linux_amd64.tar.gz",
+        "sha512": "14ed04c87d4236864c34a26ebfefb129c4723bccb9523868fda7206bc3aae5ba2331550f65dad6dc3fe4fe06edd16b81d025eead89af108134b8d978641e2b82"
     }
 }
