@@ -50,33 +50,31 @@
    **On macOS**
 
    ```
-   $ latest=$(curl -s https://storage.googleapis.com/sensu-binaries/latest.txt)
+   $ curl -LO https://s3-us-west-2.amazonaws.com/sensu.io/sensu-go/5.0.0/sensu-go-5.0.0-darwin-amd64.tar.gz
 
-   $ curl -LO https://storage.googleapis.com/sensu-binaries/$latest/darwin/amd64/sensuctl
+   $ tar -xvf sensu-go-5.0.0-darwin-amd64.tar.gz
 
-   $ chmod +x sensuctl
-
-   $ sudo mv sensuctl /usr/local/bin/
+   $ sudo cp bin/sensuctl /usr/local/bin/
    ```
 
    **On Debian/Ubuntu Linux**
 
    ```
    $ curl -s \
-   https://packagecloud.io/install/repositories/sensu/beta/script.deb.sh \
+   https://packagecloud.io/install/repositories/sensu/stable/script.deb.sh \
    | sudo bash
 
-   $ sudo apt-get install sensu-cli
+   $ sudo apt-get install sensu-go-cli
    ```
 
    **On RHEL/CentOS Linux**
 
    ```
    $ curl -s \
-   https://packagecloud.io/install/repositories/sensu/beta/script.rpm.sh \
+   https://packagecloud.io/install/repositories/sensu/stable/script.rpm.sh \
    | sudo bash
 
-   $ sudo yum install sensu-cli
+   $ sudo yum install sensu-go-cli
    ```
 
 ## Sensu Go Demo
