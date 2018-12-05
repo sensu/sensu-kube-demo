@@ -32,7 +32,7 @@ spec:
             - name: grafana-provisioning-dashboards
               mountPath: /etc/grafana/provisioning/dashboards
         - name: sensu-agent
-          image: portertech/sensu:experimental
+          image: sensu/sensu:5.0.0
           command: ["/opt/sensu/bin/sensu-agent", "start", "--log-level", "debug"]
           env:
             - name: SENSU_BACKEND_URL
