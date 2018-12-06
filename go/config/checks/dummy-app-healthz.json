@@ -1,7 +1,11 @@
 {
+    "api_version": "core/v2",
     "type": "CheckConfig",
+    "metadata": {
+        "namespace": "demo",
+        "name": "dummy-app-healthz"
+    },
     "spec": {
-        "name": "dummy-app-healthz",
         "runtime_assets": [
             "check-plugins"
         ],
@@ -13,8 +17,6 @@
         "interval": 10,
         "handlers": [
             "slack"
-        ],
-        "organization": "acme",
-        "environment": "demo"
+        ]
     }
 }

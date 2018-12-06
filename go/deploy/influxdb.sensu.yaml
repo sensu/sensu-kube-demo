@@ -33,14 +33,12 @@ spec:
             - name: INFLUXDB_USER_PASSWORD
               value: password
         - name: sensu-agent
-          image: sensu/sensu:2.0.0-beta.7
+          image: sensu/sensu:5.0.0
           command: ["/opt/sensu/bin/sensu-agent", "start", "--log-level", "debug"]
           env:
             - name: SENSU_BACKEND_URL
               value: ws://sensu-backend.default.svc.cluster.local:8081
-            - name: SENSU_ORGANIZATION
-              value: acme
-            - name: SENSU_ENVIRONMENT
+            - name: SENSU_NAMESPACE
               value: demo
             - name: SENSU_SUBSCRIPTIONS
               value: influxdb

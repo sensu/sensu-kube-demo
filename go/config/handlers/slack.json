@@ -1,17 +1,19 @@
 {
+    "api_version": "core/v2",
     "type": "Handler",
+    "metadata": {
+        "namespace": "demo",
+        "name": "slack"
+    },
     "spec": {
-        "name": "slack",
         "type": "pipe",
         "runtime_assets": [
             "slack-handler"
         ],
-        "command": "slack-handler --channel '#demo' --timeout 20 --username 'sensu' --webhook-url 'SECRET'",
-        "timeout": 10,
+        "command": "sensu-slack-handler --channel '#demo' --timeout 20 --username 'sensu' --webhook-url 'SECRET'",
+        "timeout": 30,
         "filters": [
             "is_incident"
-        ],
-        "organization": "acme",
-        "environment": "demo"
+        ]
     }
 }

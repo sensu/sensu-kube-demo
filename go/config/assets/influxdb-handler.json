@@ -1,9 +1,12 @@
 {
+    "api_version": "core/v2",
     "type": "Asset",
+    "metadata": {
+        "namespace": "demo",
+        "name": "influxdb-handler"
+    },
     "spec": {
-        "name": "influxdb-handler",
-        "url": "https://github.com/sensu/sensu-influxdb-handler/releases/download/v1.8/influxdb-handler_1.8_linux_amd64.tar.gz",
-        "sha512": "2b3ffb73351e81c048c33e14c6dad255ecf1ddadbbce65837957ef423d888e601d090cf31160362a64b635d5ae14925578801083965e4231a014a3874a38a8c6",
-        "organization": "acme"
+        "url": "https://github.com/sensu/sensu-influxdb-handler/releases/download/3.0.1/sensu-influxdb-handler_3.0.1_linux_amd64.tar.gz",
+        "sha512": "52dd78712a208ca78368d68223e7d4231cad9ed18784c98fdecb29f93fc6581d4264d116cff1324f05041142732af3b485115baa6e6bb512cf17af62da3ee19e"
     }
 }

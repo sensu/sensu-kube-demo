@@ -50,33 +50,31 @@
    **On macOS**
 
    ```
-   $ latest=$(curl -s https://storage.googleapis.com/sensu-binaries/latest.txt)
+   $ curl -LO https://s3-us-west-2.amazonaws.com/sensu.io/sensu-go/5.0.0/sensu-go-5.0.0-darwin-amd64.tar.gz
 
-   $ curl -LO https://storage.googleapis.com/sensu-binaries/$latest/darwin/amd64/sensuctl
+   $ tar -xvf sensu-go-5.0.0-darwin-amd64.tar.gz
 
-   $ chmod +x sensuctl
-
-   $ sudo mv sensuctl /usr/local/bin/
+   $ sudo cp bin/sensuctl /usr/local/bin/
    ```
 
    **On Debian/Ubuntu Linux**
 
    ```
    $ curl -s \
-   https://packagecloud.io/install/repositories/sensu/beta/script.deb.sh \
+   https://packagecloud.io/install/repositories/sensu/stable/script.deb.sh \
    | sudo bash
 
-   $ sudo apt-get install sensu-cli
+   $ sudo apt-get install sensu-go-cli
    ```
 
    **On RHEL/CentOS Linux**
 
    ```
    $ curl -s \
-   https://packagecloud.io/install/repositories/sensu/beta/script.rpm.sh \
+   https://packagecloud.io/install/repositories/sensu/stable/script.rpm.sh \
    | sudo bash
 
-   $ sudo yum install sensu-cli
+   $ sudo yum install sensu-go-cli
    ```
 
 ## Sensu Go Demo
@@ -111,39 +109,37 @@
 
 ### Multitenancy
 
-1. Create "acme" organization
+1. Create "demo" namespace
 
    ```
-   $ sensuctl organization create acme
+   $ sensuctl namespace create demo
 
-   $ sensuctl config set-organization acme
+   $ sensuctl namespace list
+
+   $ sensuctl config set-namespace demo
    ```
 
-2. Create "demo" environment within the "acme" organization
+3. Create "dev" user role with full-access to the "demo" namespace
 
    ```
-   $ sensuctl environment create demo --interactive
-
-   $ sensuctl environment list
-
-   $ sensuctl config set-environment demo
+   $ sensuctl role create dev \
+   --verb get,list,create,update,delete \
+   --resource \* --namespace demo
    ```
 
-3. Create "dev" user role with full-access to the "demo" environment
+4. Create "dev" role binding for "dev" group
 
    ```
-   $ sensuctl role create dev -t '*' \
-   --create --delete --update --read \
-   --environment demo --organization acme
+   $ sensuctl role-binding create dev --role dev --group dev
    ```
 
-4. Create "demo" user with the "dev" role
+5. Create "demo" user that is a member of the "dev" group
 
    ```
    $ sensuctl user create demo --interactive
    ```
 
-5. Reconfigure `sensuctl` to use the "demo" user, "acme" organization", and "demo" environment
+6. Reconfigure `sensuctl` to use the "demo" user and "demo" namespace
 
    ```
    $ sensuctl configure
