@@ -21,7 +21,7 @@ spec:
         - protocol: TCP
           containerPort: 8080
       - name: sensu-client
-        image: sensu/sensu-classic:1.5.0-1
+        image: portertech/sensu-classic:daemonset
         env:
         - name: HOST_IP
           valueFrom:
