@@ -252,7 +252,7 @@
 1. Create a Kubernetes ConfigMap for InfluxDB configuration
 
    ```
-   $ kubectl apply configmap influxdb-config --from-file go/configmaps/influxdb.conf
+   $ kubectl create configmap influxdb-config --from-file go/configmaps/influxdb.conf
    ```
 
 2. Deploy InfluxDB with a Sensu Agent sidecar
@@ -354,9 +354,9 @@
 1. Create Kubernetes ConfigMaps for Grafana configuration
 
    ```
-   $ kubectl apply configmap grafana-provisioning-datasources --from-file=./go/configmaps/grafana-provisioning-datasources.yaml
+   $ kubectl create configmap grafana-provisioning-datasources --from-file=./go/configmaps/grafana-provisioning-datasources.yaml
 
-   $ kubectl apply configmap grafana-provisioning-dashboards --from-file=./go/configmaps/grafana-provisioning-dashboards.yaml
+   $ kubectl create configmap grafana-provisioning-dashboards --from-file=./go/configmaps/grafana-provisioning-dashboards.yaml
    ```
 
 2. Deploy Grafana with a Sensu Agent sidecar
