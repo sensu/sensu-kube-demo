@@ -1,0 +1,15 @@
+api_version: core/v2
+type: CheckConfig
+metadata:
+  namespace: demo
+  name: dummy-app-healthz
+spec:
+  runtime_assets:
+  - check-plugins
+  command: check-http -u http://localhost:8080/healthz
+  subscriptions:
+  - dummy
+  publish: true
+  interval: 10
+  handlers:
+  - slack

@@ -270,9 +270,9 @@
 1. Register a Sensu 2.0 Asset for influxdb handler
 
    ```
-   $ cat go/config/assets/influxdb-handler.json
+   $ cat go/config/assets/influxdb-handler.yaml
 
-   $ sensuctl create -f go/config/assets/influxdb-handler.json
+   $ sensuctl create -f go/config/assets/influxdb-handler.yaml
 
    $ sensuctl asset info influxdb-handler
    ```
@@ -280,9 +280,9 @@
 2. Create "influxdb" event handler for sending Sensu 2.0 metrics to InfluxDB
 
    ```
-   $ cat go/config/handlers/influxdb.json
+   $ cat go/config/handlers/influxdb.yaml
 
-   $ sensuctl create -f go/config/handlers/influxdb.json
+   $ sensuctl create -f go/config/handlers/influxdb.yaml
 
    $ sensuctl handler info influxdb
    ```
@@ -304,7 +304,7 @@
 1. Register a Sensu 2.0 Asset for check plugins
 
    ```
-   $ sensuctl create -f go/config/assets/check-plugins.json
+   $ sensuctl create -f go/config/assets/check-plugins.yaml
 
    $ sensuctl asset info check-plugins
    ```
@@ -312,7 +312,7 @@
 2. Create a check to monitor dummy app /healthz
 
    ```
-   $ sensuctl create -f go/config/checks/dummy-app-healthz.json
+   $ sensuctl create -f go/config/checks/dummy-app-healthz.yaml
 
    $ sensuctl check info dummy-app-healthz
 
@@ -332,13 +332,13 @@
 1. Register a Sensu 2.0 Asset for the Prometheus metric collector
 
    ```
-   $ sensuctl create -f go/config/assets/prometheus-collector.json
+   $ sensuctl create -f go/config/assets/prometheus-collector.yaml
    ```
 
 2. Create a check to collect dummy app Prometheus metrics
 
    ```
-   $ sensuctl create -f go/config/checks/dummy-app-prometheus.json
+   $ sensuctl create -f go/config/checks/dummy-app-prometheus.yaml
 
    $ sensuctl check info dummy-app-prometheus
    ```
