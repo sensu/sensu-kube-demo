@@ -16,7 +16,8 @@
         "publish": true,
         "interval": 10,
         "handlers": [
-            "slack"
+            "slack",
+            "pagerduty"
         ]
     }
 }

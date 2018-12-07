@@ -1,0 +1,20 @@
+{
+    "api_version": "core/v2",
+    "type": "Handler",
+    "metadata": {
+        "namespace": "demo",
+        "name": "pagerduty"
+    },
+    "spec": {
+        "type": "pipe",
+        "runtime_assets": [
+            "pagerduty-handler"
+        ],
+        "command": "sensu-pagerduty-handler --token 'SECRET'",
+        "timeout": 10,
+        "filters": [
+            "is_incident",
+            "not_silenced"
+        ]
+    }
+}
