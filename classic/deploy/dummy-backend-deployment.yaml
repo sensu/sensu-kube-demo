@@ -22,6 +22,10 @@ spec:
           containerPort: 8080
       - name: sensu-client
         image: portertech/sensu-classic:daemonset
+        resources:
+          requests:
+            cpu: 300m
+            memory: 300Mi
         env:
         - name: HOST_IP
           valueFrom:

@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "kubelet-metrics": {
+      "type": "metric",
+      "command": "sensu-prometheus-collector -exporter-url http://$HOST_IP:10255/metrics",
+      "subscribers": ["roundrobin:daemonset"],
+      "interval": 30,
+      "handler": "influxdb",
+      "output_format": "influxdb_line"
+    }
+  }
+}
