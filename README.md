@@ -61,18 +61,6 @@
    _NOTE: replace `<your-name`, `<your-pword>`, and `<your-email>` with your
    Docker Hub username, password, and email address._
 
-   Edit the Kubernetes deployment to use the `docker-registry-creds` secret:
-
-   ```
-   spec:
-     containers:
-       - name: sensu-enterprise
-         image: sensu/sensu-classic-enterprise:3.2.2-1
-         ...: ...
-     imagePullSecrets:
-       - name: docker-registry-creds
-   ```
-
    Reference: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 
    [sensu-classic-enterprise]: https://hub.docker.com/r/sensu/sensu-classic-enterprise/
