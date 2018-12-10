@@ -3,7 +3,7 @@
     "cadvisor-metrics": {
       "type": "metric",
       "command": "sensu-prometheus-collector -exporter-url http://$HOST_IP:10255/metrics/cadvisor",
-      "subscribers": ["roundrobin:daemonset"],
+      "subscribers": ["daemonset"],
       "interval": 30,
       "handler": "influxdb",
       "output_format": "influxdb_line"
