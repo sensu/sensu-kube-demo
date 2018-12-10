@@ -86,10 +86,7 @@
    $ kubectl create configmap sensu-enterprise-integrations --from-file=./classic/configmaps/sensu-enterprise/integrations/
    $ kubectl create configmap sensu-enterprise-dashboard-config --from-file=./classic/configmaps/sensu-enterprise-dashboard/dashboard.json
    $ kubectl create configmap sensu-client-defaults --from-file=./classic/configmaps/sensu-client/defaults.json
-   $ kubectl apply -f classic/deploy/sensu-enterprise-service.yaml
-   $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-service.yaml
-   $ kubectl apply -f classic/deploy/sensu-enterprise-deployment.yaml
-   $ kubectl apply -f classic/deploy/sensu-enterprise-dashboard-deployment.yaml
+   $ kubectl apply -f classic/deploy/sensu-enterprise/
    ```
 
    > _PROTIP: to edit and replace, or add new configuration files to a configmap,
@@ -103,15 +100,14 @@
    > _This instructs kubernetes to do a dry run (`--dry-run`) of the `create
    > configmap` command and output the resulting yaml (`-o yaml`), which can be
    > piped to `kubectl replace -f` using the bash `-` syntax (a synonym for
-   > `/dev/stdin`). 
+   > `/dev/stdin`).
 
 
 1. Configure and deploy InfluxDB
 
    ```
    $ kubectl create configmap influxdb-config --from-file=./classic/configmaps/influxdb/influxdb.conf
-   $ kubectl apply -f classic/deploy/influxdb-service.yaml
-   $ kubectl apply -f classic/deploy/influxdb-deployment.yaml
+   $ kubectl apply -f classic/deploy/influxdb/
    ```
 
 1. Configure and deploy Grafana
@@ -120,27 +116,25 @@
    $ kubectl create configmap grafana-provisioning-datasources --from-file=./classic/configmaps/grafana/grafana-provisioning-datasources.yaml
    $ kubectl create configmap grafana-provisioning-dashboards --from-file=./classic/configmaps/grafana/grafana-provisioning-dashboards.yaml
    $ kubectl create configmap grafana-dashboards --from-file=./classic/configmaps/grafana/dashboards
-   $ kubectl apply -f classic/deploy/grafana-service.yaml
-   $ kubectl apply -f classic/deploy/grafana-deployment.yaml
+   $ kubectl apply -f classic/deploy/grafana/
    ```
 
 1. Deploy Prometheus Node Exporters
 
    ```
-   $ kubectl apply -f classic/deploy/node-exporter-daemonset.yaml
+   $ kubectl apply -f classic/deploy/node-exporter/
    ```
 
 1. Deploy Sensu Client daemonsets
 
    ```
-   $ kubectl apply -f classic/deploy/sensu-client-daemonset.yaml
+   $ kubectl apply -f classic/deploy/sensu-client/
    ```
 
 1. Deploy an application
 
    ```
-   $ kubectl apply -f classic/deploy/dummy-backend-service.yaml
-   $ kubectl apply -f classic/deploy/dummy-backend-deployment.yaml
+   $ kubectl apply -f classic/deploy/dummy-backend/
    ```
 
 -----
