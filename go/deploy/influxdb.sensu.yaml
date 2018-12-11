@@ -19,9 +19,13 @@ spec:
           image: influxdb:1.7.1
           ports:
             - protocol: TCP
+              containerPort: 8082
+            - protocol: TCP
               containerPort: 8086
             - protocol: UDP
               containerPort: 8089
+            - protocol: TCP
+              containerPort: 8093
           volumeMounts:
             - name: influxdb-config
               mountPath: /etc/influxdb
@@ -55,6 +59,10 @@ spec:
   selector:
     app: influxdb
   ports:
+    - name: flux
+      protocol: TCP
+      port: 8082
+      targetPort: 8082
     - name: api
       protocol: TCP
       port: 8086
@@ -63,3 +71,7 @@ spec:
       protocol: UDP
       port: 8089
       targetPort: 8089
+    - name: fluxd
+      protocol: TCP
+      port: 8093
+      targetPort: 8093
