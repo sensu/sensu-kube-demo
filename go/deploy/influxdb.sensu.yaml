@@ -16,7 +16,7 @@ spec:
             name: influxdb-config
       containers:
         - name: influxdb
-          image: influxdb:1.5.3
+          image: influxdb:1.7.1
           ports:
             - protocol: TCP
               containerPort: 8086
