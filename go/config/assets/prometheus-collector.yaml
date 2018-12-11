@@ -4,5 +4,5 @@ metadata:
   namespace: demo
   name: prometheus-collector
 spec:
-  url: https://github.com/sensu/sensu-prometheus-collector/releases/download/1.1.0/sensu-prometheus-collector_1.1.0_linux_amd64.tar.gz
-  sha512: 7fa142f87aa9e3d5cdfaa05edceb7c0a2f153702b636967ad5f30e64139e58f6404408f59185b2939fc8765c74d7f013e055d52a4b249f017604e4f9878a1cfb
+  url: https://github.com/sensu/sensu-prometheus-collector/releases/download/1.1.4/sensu-prometheus-collector_1.1.4_linux_amd64.tar.gz
+  sha512: 8d2a5ea6d97818f0da97e8bcf1f2ca765d7acb890dba0682dd35cc6f09714da59b7e974d7f8dbaba507fefa2104b3e145bd31f924fdf154b8870892d0afb4767
