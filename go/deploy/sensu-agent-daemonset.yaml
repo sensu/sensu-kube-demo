@@ -30,7 +30,7 @@ spec:
             - name: SENSU_NAMESPACE
               value: demo
             - name: SENSU_SUBSCRIPTIONS
-              value: "daemonset,roundrobin:daemonset"
+              value: "daemonset"
             - name: SENSU_DEREGISTER
               value: "true"
             - name: SENSU_STATSD_EVENT_HANDLERS
