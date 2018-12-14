@@ -1,27 +1,31 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dummy
+  name: dummy-backend
 spec:
   replicas: 2
   template:
     metadata:
-      name: dummy
+      name: dummy-backend
       labels:
-        app: dummy
+        app: dummy-backend
     spec:
       volumes:
-      - name: sensu-client-config
+      - name: sensu-client-defaults
         configMap:
-          name: sensu-client-config
+          name: sensu-client-defaults
       containers:
-      - name: dummy
+      - name: dummy-backend
         image: portertech/dummy:1.2.0
         ports:
         - protocol: TCP
           containerPort: 8080
       - name: sensu-client
-        image: sensu/sensu-classic:1.5.0-1
+        image: portertech/sensu-classic:daemonset
+        resources:
+          requests:
+            cpu: 300m
+            memory: 300Mi
         env:
         - name: HOST_IP
           valueFrom:
@@ -34,20 +38,7 @@ spec:
         - name: SENSU_CLIENT_SUBSCRIPTIONS
           value: "sidecar,dummy"
         volumeMounts:
-        - name: sensu-client-config
+        - name: sensu-client-defaults
           mountPath: /etc/sensu/conf.d/
         ports:
         - containerPort: 3030
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: dummy
-spec:
-  selector:
-    app: dummy
-  ports:
-  - name: http
-    protocol: TCP
-    port: 8080
-    targetPort: 8080

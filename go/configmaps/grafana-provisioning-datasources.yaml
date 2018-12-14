@@ -15,3 +15,13 @@ datasources:
   password: password
   version: 1
   editable: true
+- name: InfluxDB Flux
+  type: grafana-influxdb-flux-datasource
+  access: proxy
+  orgId: 1
+  url: http://influxdb.default.svc.cluster.local:8086
+  database: sensu
+  user: sensu
+  password: password
+  version: 1
+  editable: true

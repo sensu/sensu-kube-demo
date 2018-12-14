@@ -1,0 +1,8 @@
+api_version: core/v2
+type: Asset
+metadata:
+  namespace: demo
+  name: slack-handler
+spec:
+  url: https://github.com/sensu/sensu-slack-handler/releases/download/1.0.1/sensu-slack-handler_1.0.1_linux_amd64.tar.gz
+  sha512: 38b6a86f1475794530cff22913086e9db85d9105144437e5c30c483aa94b3b82890443a5c51e45fe1723e1781773b187f070347ebce06d92cd04c20c35cb1ae0

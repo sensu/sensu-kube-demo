@@ -27,12 +27,10 @@ spec:
               value: "kube-node-$(HOST_IP)"
             - name: SENSU_BACKEND_URL
               value: ws://sensu-backend.default.svc.cluster.local:8081
-            - name: SENSU_ORGANIZATION
-              value: acme
-            - name: SENSU_ENVIRONMENT
+            - name: SENSU_NAMESPACE
               value: demo
             - name: SENSU_SUBSCRIPTIONS
-              value: "daemonset,roundrobin:daemonset"
+              value: "daemonset"
             - name: SENSU_DEREGISTER
               value: "true"
             - name: SENSU_STATSD_EVENT_HANDLERS

@@ -1,8 +1,8 @@
 {
     "sensu": [
         {
-            "name": "sensu-enterprise",
-            "host": "sensu-enterprise.default.svc.cluster.local",
+            "name": "kubernetes",
+            "host": "sensu-enterprise",
             "port": 4567
         }
     ],

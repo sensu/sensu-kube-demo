@@ -5,7 +5,7 @@ metadata:
   labels:
     app: sensu-enterprise
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: sensu-enterprise
@@ -15,9 +15,18 @@ spec:
         app: sensu-enterprise
     spec:
       volumes:
-        - name: sensu-enterprise-config
+        - name: sensu-enterprise-defaults
           configMap:
-            name: sensu-enterprise-config
+            name: sensu-enterprise-defaults
+        - name: sensu-enterprise-checks
+          configMap:
+            name: sensu-enterprise-checks
+        - name: sensu-enterprise-handlers
+          configMap:
+            name: sensu-enterprise-handlers
+        - name: sensu-enterprise-integrations
+          configMap:
+            name: sensu-enterprise-integrations
       containers:
         - name: sensu-enterprise
           image: sensu/sensu-classic-enterprise:3.2.2-1 # Private image - request access
@@ -29,8 +38,14 @@ spec:
             - name: REDIS_URL
               value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
           volumeMounts:
-            - name: sensu-enterprise-config
-              mountPath: /etc/sensu/conf.d/
+            - name: sensu-enterprise-defaults
+              mountPath: /etc/sensu/conf.d/defaults
+            - name: sensu-enterprise-checks
+              mountPath: /etc/sensu/conf.d/checks
+            - name: sensu-enterprise-handlers
+              mountPath: /etc/sensu/conf.d/handlers
+            - name: sensu-enterprise-integrations
+              mountPath: /etc/sensu/conf.d/integrations
           ports:
             - containerPort: 4567
           readinessProbe:
@@ -45,16 +60,5 @@ spec:
               port: 4567
             initialDelaySeconds: 10
             periodSeconds: 60
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sensu-enterprise
-spec:
-  selector:
-    app: sensu-enterprise
-  ports:
-    - name: api
-      protocol: TCP
-      port: 4567
-      targetPort: 4567
+      imagePullSecrets:
+        - name: docker-registry-creds
