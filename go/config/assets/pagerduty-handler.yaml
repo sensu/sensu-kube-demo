@@ -1,0 +1,8 @@
+api_version: core/v2
+type: Asset
+metadata:
+  namespace: demo
+  name: pagerduty-handler
+spec:
+  url: https://github.com/sensu/sensu-pagerduty-handler/releases/download/1.0.0/sensu-pagerduty-handler_1.0.0_linux_amd64.tar.gz
+  sha512: f70cb343861c72bfc023b6e728df0377401b59e276b079d89b60c025ef72425cf2280a0ac7892cc388dd5fb1f6915df9e28c2944dbe368442384a91aabb59060

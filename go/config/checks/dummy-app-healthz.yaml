@@ -13,3 +13,4 @@ spec:
   interval: 10
   handlers:
   - slack
+  - pagerduty
