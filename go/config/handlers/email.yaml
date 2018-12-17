@@ -1,0 +1,14 @@
+api_version: core/v2
+type: Handler
+metadata:
+  namespace: demo
+  name: email
+spec:
+  type: pipe
+  runtime_assets:
+  - email-handler
+  command: sensu-email-handler -f from@example.com -t to@example.com -s smtp.example.com -u user -p password
+  timeout: 30
+  filters:
+  - is_incident
+  - not_silenced

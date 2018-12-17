@@ -1,0 +1,8 @@
+api_version: core/v2
+type: Asset
+metadata:
+  namespace: demo
+  name: email-handler
+spec:
+  url: https://github.com/sensu/sensu-email-handler/releases/download/0.0.2/sensu-email-handler_0.0.2_linux_amd64.tar.gz
+  sha512: c4e18b10353e843184c174dec6b12039041d930afe0071dacc32ebf48db2975a463e6af65fcdab1f16518e2008b60325e1a0d809ab22c1134eb43673cdf29442
