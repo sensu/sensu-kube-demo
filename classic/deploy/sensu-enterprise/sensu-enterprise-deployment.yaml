@@ -5,28 +5,40 @@ metadata:
   labels:
     app: sensu-enterprise
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: sensu-enterprise
+  replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: sensu-enterprise
+      annotations:
+        io.sensu.release: "0.4"
     spec:
       volumes:
         - name: sensu-enterprise-defaults
           configMap:
             name: sensu-enterprise-defaults
+            optional: true
         - name: sensu-enterprise-checks
           configMap:
             name: sensu-enterprise-checks
+            optional: true
         - name: sensu-enterprise-handlers
           configMap:
             name: sensu-enterprise-handlers
+            optional: true
         - name: sensu-enterprise-integrations
           configMap:
             name: sensu-enterprise-integrations
+            optional: true
       containers:
         - name: sensu-enterprise
           image: sensu/sensu-classic-enterprise:3.2.2-1 # Private image - request access
