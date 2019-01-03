@@ -4,6 +4,12 @@ metadata:
   name: dummy-backend
 spec:
   replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       name: dummy-backend
@@ -21,7 +27,7 @@ spec:
         - protocol: TCP
           containerPort: 8080
       - name: sensu-client
-        image: portertech/sensu-classic:daemonset
+        image: sensuhq/sensu-classic-demo:1.5.0-1
         resources:
           requests:
             cpu: 300m
@@ -44,3 +50,13 @@ spec:
           mountPath: /etc/sensu/conf.d/
         ports:
         - containerPort: 3030
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 300
+          periodSeconds: 60
+          timeoutSeconds: 5
+          failureThreshold: 3
+      imagePullSecrets:
+        - name: docker-registry-creds
