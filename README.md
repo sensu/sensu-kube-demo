@@ -320,15 +320,30 @@
 2. Create a check to collect dummy app Prometheus metrics
 
    ```
-   $ sensuctl create -f go/config/checks/dummy-app-prometheus.yaml
+   $ sensuctl create -f go/config/checks/dummy-app-metrics.yaml
 
-   $ sensuctl check info dummy-app-prometheus
+   $ sensuctl check info dummy-app-metrics
    ```
 
 3. Query InfluxDB to list the stored series
 
    ```
    $ curl -GET 'http://influxdb.local/query' --data-urlencode 'q=SHOW SERIES ON sensu'
+   ```
+
+4. Deploy Sensu Agent as a DaemonSet
+
+   ```
+   $ kubectl apply -f go/deploy/sensu-agent-daemonset.yaml
+   ```
+
+5. Create checks to collect Kubernetes metrics
+
+   ```
+   $ kubectl apply -f go/config/checks/node-exporter-metrics.yaml
+   $ kubectl apply -f go/config/checks/kube-state-metrics.yaml
+   $ kubectl apply -f go/config/checks/kubelet-metrics.yaml
+   $ kubectl apply -f go/config/checks/cadvisor-metrics.yaml
    ```
 
 ### Deploy Grafana

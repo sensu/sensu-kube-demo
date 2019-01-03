@@ -18,6 +18,9 @@ spec:
         - name: sensu-enterprise-dashboard-config
           configMap:
             name: sensu-enterprise-dashboard-config
+        - name: sensu-client-defaults
+          configMap:
+            name: sensu-client-defaults
       containers:
         - name: sensu-enterprise-dashboard
           image: sensu/sensu-classic-enterprise-dashboard:2.12.0-1 # Private image - request access
@@ -26,5 +29,25 @@ spec:
               mountPath: /etc/sensu/dashboard.d
           ports:
             - containerPort: 3000
+        - name: sensu-client
+          image: sensu/sensu-classic:1.5.0-1
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: SENSU_TRANSPORT_NAME
+              value: "redis"
+            - name: REDIS_URL
+              value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+            - name: RABBITMQ_URL
+              value: "amqp://sensu:supersecret@$(SENSU_RABBITMQ_SERVICE_HOST):$(SENSU_RABBITMQ_SERVICE_PORT)/%2Fsensu"
+            - name: SENSU_CLIENT_SUBSCRIPTIONS
+              value: "sidecar,influxdb"
+          volumeMounts:
+            - name: sensu-client-defaults
+              mountPath: /etc/sensu/conf.d/
+          ports:
+            - containerPort: 3030
       imagePullSecrets:
         - name: docker-registry-creds

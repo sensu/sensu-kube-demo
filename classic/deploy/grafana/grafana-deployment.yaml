@@ -20,6 +20,9 @@ spec:
         - name: grafana-dashboards
           configMap:
             name: grafana-dashboards
+        - name: sensu-client-defaults
+          configMap:
+            name: sensu-client-defaults
       containers:
         - name: grafana
           image: sensu/grafana:latest
@@ -36,3 +39,23 @@ spec:
               mountPath: /etc/grafana/provisioning/dashboards
             - name: grafana-dashboards
               mountPath: /var/lib/grafana/dashboards
+        - name: sensu-client
+          image: sensu/sensu-classic:1.5.0-1
+          env:
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: SENSU_TRANSPORT_NAME
+              value: "redis"
+            - name: REDIS_URL
+              value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+            - name: RABBITMQ_URL
+              value: "amqp://sensu:supersecret@$(SENSU_RABBITMQ_SERVICE_HOST):$(SENSU_RABBITMQ_SERVICE_PORT)/%2Fsensu"
+            - name: SENSU_CLIENT_SUBSCRIPTIONS
+              value: "sidecar,grafana"
+          volumeMounts:
+            - name: sensu-client-defaults
+              mountPath: /etc/sensu/conf.d/
+          ports:
+            - containerPort: 3030

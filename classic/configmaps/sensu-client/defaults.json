@@ -1,5 +1,9 @@
 {
   "client": {
-    "environment": "kubernetes"
+    "environment": "kubernetes",
+    "deregister": true,
+    "deregistration": {
+      "handler": "deregistration"
+    }
   }
 }
