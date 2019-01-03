@@ -27,10 +27,6 @@ spec:
           configMap:
             name: sensu-enterprise-defaults
             optional: true
-        - name: sensu-enterprise-server
-          configMap:
-            name: sensu-enterprise-server
-            optional: true
         - name: sensu-enterprise-checks
           configMap:
             name: sensu-enterprise-checks
@@ -56,7 +52,7 @@ spec:
             - name: RABBITMQ_URL
               value: "amqp://sensu:supersecret@sensu-rabbitmq.default.svc.cluster.local:5672/%2Fsensu"
           volumeMounts:
-            - name: sensu-enterprise-server
+            - name: sensu-enterprise-defaults
               mountPath: /etc/sensu/conf.d/server
             - name: sensu-enterprise-checks
               mountPath: /etc/sensu/conf.d/checks
