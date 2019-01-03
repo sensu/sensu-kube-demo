@@ -6,7 +6,6 @@ kubectl create configmap grafana-provisioning-dashboards --from-file=configmaps/
 kubectl create configmap grafana-dashboards --from-file=configmaps/grafana/dashboards/
 kubectl create configmap sensu-enterprise-defaults --from-file=configmaps/sensu-enterprise/server/
 kubectl create configmap sensu-enterprise-checks --from-file=configmaps/sensu-enterprise/checks/
-kubectl create configmap sensu-enterprise-plugins --from-file=configmaps/sensu-enterprise/plugins/
 kubectl create configmap sensu-enterprise-handlers --from-file=configmaps/sensu-enterprise/handlers/
 kubectl create configmap sensu-enterprise-integrations --from-file=configmaps/sensu-enterprise/integrations/
 kubectl create configmap sensu-enterprise-dashboard-config --from-file=configmaps/sensu-enterprise-dashboard/dashboard.json
