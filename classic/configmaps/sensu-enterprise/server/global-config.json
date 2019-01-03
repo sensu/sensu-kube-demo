@@ -2,8 +2,8 @@
   "sensu": {
     "keepalives": {
       "thresholds": {
-        "warning": 60,
-        "critical": 120
+        "warning": 40,
+        "critical": 60
       }
     }
   }
