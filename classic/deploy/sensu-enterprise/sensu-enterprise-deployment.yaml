@@ -41,7 +41,7 @@ spec:
             optional: true
       containers:
         - name: sensu-enterprise
-          image: sensu/sensu-classic-enterprise:3.2.2-1 # Private image - request access
+          image: sensuhq/sensu-classic-enterprise-demo:3.2.2-1 # Private image - request access
           env:
             - name: SENSU_API_PORT
               value: "4567"
@@ -66,13 +66,17 @@ spec:
             httpGet:
               path: /health
               port: 4567
-            initialDelaySeconds: 30
+            initialDelaySeconds: 120
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
           livenessProbe:
             httpGet:
               path: /health
               port: 4567
-            initialDelaySeconds: 10
+            initialDelaySeconds: 180
             periodSeconds: 60
+            timeoutSeconds: 5
+            failureThreshold: 3
       imagePullSecrets:
         - name: docker-registry-creds

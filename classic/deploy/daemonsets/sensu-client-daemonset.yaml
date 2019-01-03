@@ -5,10 +5,17 @@ metadata:
   labels:
     name: sensu-client
 spec:
+  minReadySeconds: 10
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         name: sensu-client
+      annotations:
+        sensu.io/update: "0"
     spec:
       hostPID: true
       hostIPC: true

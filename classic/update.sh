@@ -10,6 +10,7 @@ kubectl create configmap sensu-enterprise-handlers --from-file=configmaps/sensu-
 kubectl create configmap sensu-enterprise-integrations --from-file=configmaps/sensu-enterprise/integrations/ --dry-run -o=yaml | kubectl replace -f -
 kubectl create configmap sensu-enterprise-dashboard-config --from-file=configmaps/sensu-enterprise-dashboard/dashboard.json --dry-run -o=yaml | kubectl replace -f -
 kubectl create configmap sensu-client-defaults --from-file=configmaps/sensu-client/defaults.json --dry-run -o=yaml | kubectl replace -f -
+kubectl create configmap sensu-client-daemonset --from-file=configmaps/sensu-client/daemonsets.json --dry-run -o=yaml | kubectl replace -f -
 kubectl apply -f=deploy/sensu-enterprise/
 kubectl apply -f=deploy/daemonsets/
 kubectl apply -f=deploy/influxdb/

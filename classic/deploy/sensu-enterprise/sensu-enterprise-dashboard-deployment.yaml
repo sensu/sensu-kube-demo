@@ -18,9 +18,28 @@ spec:
         - name: sensu-enterprise-dashboard-config
           configMap:
             name: sensu-enterprise-dashboard-config
+            optional: true
         - name: sensu-client-defaults
           configMap:
             name: sensu-client-defaults
+            optional: true
+      initContainers:
+        - name: wait-for-sensu-enterprise
+          image: alpine:latest
+          imagePullPolicy: Always
+          command:
+            - ash
+            - -c
+            - |
+              apk --no-cache add curl
+              ENDPOINT_URL="http://$(SENSU_ENTERPRISE_SERVICE_HOST):$(SENSU_ENTERPRISE_SERVICE_PORT)/health"
+              ENDPOINT_STATUS=200
+              echo "Checking: $ENDPOINT_URL"
+              while [[ $(curl --silent --output /dev/null --write-out "${http_code}" ${ENDPOINT_URL}) -ne ${ENDPOINT_STATUS} ]]; do
+                echo "Not ready"
+                sleep 10s
+              done
+              echo "Ready"
       containers:
         - name: sensu-enterprise-dashboard
           image: sensu/sensu-classic-enterprise-dashboard:2.12.0-1 # Private image - request access
@@ -29,6 +48,22 @@ spec:
               mountPath: /etc/sensu/dashboard.d
           ports:
             - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            timeoutSeconds: 5
+            failureThreshold: 3
         - name: sensu-client
           image: sensu/sensu-classic:1.5.0-1
           env:
