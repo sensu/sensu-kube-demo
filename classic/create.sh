@@ -1,6 +1,5 @@
 #!/bin/sh
 
-kubectl create configmap sensu-rabbitmq-config --from-file=configmaps/sensu-enterprise/rabbitmq/
 kubectl create configmap sensu-enterprise-defaults --from-file=configmaps/sensu-enterprise/server/
 kubectl create configmap sensu-enterprise-checks --from-file=configmaps/sensu-enterprise/checks/
 kubectl create configmap sensu-enterprise-plugins --from-file=configmaps/sensu-enterprise/plugins/
