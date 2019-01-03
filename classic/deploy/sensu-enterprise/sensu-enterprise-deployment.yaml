@@ -20,12 +20,16 @@ spec:
       labels:
         app: sensu-enterprise
       annotations:
-        io.sensu.release: "0.4"
+        sensu.io/update: "0"
     spec:
       volumes:
         - name: sensu-enterprise-defaults
           configMap:
             name: sensu-enterprise-defaults
+            optional: true
+        - name: sensu-enterprise-server
+          configMap:
+            name: sensu-enterprise-server
             optional: true
         - name: sensu-enterprise-checks
           configMap:
@@ -43,15 +47,17 @@ spec:
         - name: sensu-enterprise
           image: sensu/sensu-classic-enterprise:3.2.2-1 # Private image - request access
           env:
-            - name: SENSU_TRANSPORT_NAME
-              value: "redis"
             - name: SENSU_API_PORT
               value: "4567"
+            - name: SENSU_TRANSPORT_NAME
+              value: "redis"
             - name: REDIS_URL
               value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+            - name: RABBITMQ_URL
+              value: "amqp://sensu:supersecret@sensu-rabbitmq.default.svc.cluster.local:5672/%2Fsensu"
           volumeMounts:
-            - name: sensu-enterprise-defaults
-              mountPath: /etc/sensu/conf.d/defaults
+            - name: sensu-enterprise-server
+              mountPath: /etc/sensu/conf.d/server
             - name: sensu-enterprise-checks
               mountPath: /etc/sensu/conf.d/checks
             - name: sensu-enterprise-handlers
@@ -64,8 +70,8 @@ spec:
             httpGet:
               path: /health
               port: 4567
-            initialDelaySeconds: 10
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /health

@@ -20,7 +20,7 @@ spec:
           name: sensu-client-defaults
       containers:
       - name: sensu-client
-        image: portertech/sensu-classic:daemonset
+        image: sensu/sensu-classic:1.5.0-1
         env:
         - name: HOST_IP
           valueFrom:
@@ -32,6 +32,8 @@ spec:
           value: "redis"
         - name: REDIS_URL
           value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+        - name: RABBITMQ_URL
+          value: "amqp://sensu:supersecret@$(SENSU_RABBITMQ_SERVICE_HOST):$(SENSU_RABBITMQ_SERVICE_PORT)/%2Fsensu"
         - name: SENSU_CLIENT_SUBSCRIPTIONS
           value: "daemonset,roundrobin:daemonset"
         volumeMounts:
