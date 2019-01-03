@@ -1,5 +1,9 @@
 #!/bin/sh
 
+kubectl create configmap influxdb-config --from-file=configmaps/influxdb/
+kubectl create configmap grafana-provisioning-datasources --from-file=configmaps/grafana/grafana-provisioning-datasources.yaml
+kubectl create configmap grafana-provisioning-dashboards --from-file=configmaps/grafana/grafana-provisioning-dashboards.yaml
+kubectl create configmap grafana-dashboards --from-file=configmaps/grafana/dashboards/
 kubectl create configmap sensu-enterprise-defaults --from-file=configmaps/sensu-enterprise/server/
 kubectl create configmap sensu-enterprise-checks --from-file=configmaps/sensu-enterprise/checks/
 kubectl create configmap sensu-enterprise-plugins --from-file=configmaps/sensu-enterprise/plugins/

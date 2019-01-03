@@ -8,6 +8,10 @@ kubectl delete deployment sensu-redis
 kubectl delete deployment influxdb
 kubectl delete deployment grafana
 kubectl delete deployment dummy-backend
+kubectl create configmap influxdb-config
+kubectl create configmap grafana-provisioning-datasources
+kubectl create configmap grafana-provisioning-dashboards
+kubectl create configmap grafana-dashboards
 kubectl delete configmap sensu-enterprise-defaults
 kubectl delete configmap sensu-enterprise-checks
 kubectl delete configmap sensu-enterprise-plugins

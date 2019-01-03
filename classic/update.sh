@@ -1,5 +1,9 @@
 #!/bin/sh
 
+kubectl create configmap influxdb-config --from-file=configmaps/influxdb/ --dry-run -o=yaml | kubectl replace -f -
+kubectl create configmap grafana-provisioning-datasources --from-file=configmaps/grafana/grafana-provisioning-datasources.yaml --dry-run -o=yaml | kubectl replace -f -
+kubectl create configmap grafana-provisioning-dashboards --from-file=configmaps/grafana/grafana-provisioning-dashboards.yaml --dry-run -o=yaml | kubectl replace -f -
+kubectl create configmap grafana-dashboards --from-file=configmaps/grafana/dashboards/ --dry-run -o=yaml | kubectl replace -f -
 kubectl create configmap sensu-enterprise-defaults --from-file=configmaps/sensu-enterprise/server/ --dry-run -o=yaml | kubectl replace -f -
 kubectl create configmap sensu-enterprise-checks --from-file=configmaps/sensu-enterprise/checks/ --dry-run -o=yaml | kubectl replace -f -
 kubectl create configmap sensu-enterprise-plugins --from-file=configmaps/sensu-enterprise/plugins/ --dry-run -o=yaml | kubectl replace -f -
