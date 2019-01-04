@@ -1,9 +1,9 @@
 {
   "checks": {
-    "dummy-backend-metrics": {
+    "service-a-metrics": {
       "type": "metric",
       "command": "sensu-prometheus-collector -exporter-url http://localhost:8080/metrics",
-      "subscribers": ["dummy"],
+      "subscribers": ["service-a"],
       "interval": 5,
       "handler": "influxdb",
       "output_format": "influxdb_line"

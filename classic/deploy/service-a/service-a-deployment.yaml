@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dummy-backend
+  name: service-a
 spec:
   replicas: 2
   minReadySeconds: 5
@@ -12,16 +12,16 @@ spec:
       maxUnavailable: 0
   template:
     metadata:
-      name: dummy-backend
+      name: service-a
       labels:
-        app: dummy-backend
+        app: service-a
     spec:
       volumes:
       - name: sensu-client-defaults
         configMap:
           name: sensu-client-defaults
       containers:
-      - name: dummy-backend
+      - name: service-a
         image: portertech/dummy:1.2.0
         ports:
         - protocol: TCP
@@ -44,7 +44,7 @@ spec:
         - name: RABBITMQ_URL
           value: "amqp://sensu:supersecret@$(SENSU_RABBITMQ_SERVICE_HOST):$(SENSU_RABBITMQ_SERVICE_PORT)/%2Fsensu"
         - name: SENSU_CLIENT_SUBSCRIPTIONS
-          value: "sidecar,dummy"
+          value: "sidecar,service-a"
         volumeMounts:
         - name: sensu-client-defaults
           mountPath: /etc/sensu/conf.d/

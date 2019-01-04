@@ -20,7 +20,7 @@ spec:
       labels:
         app: sensu-enterprise
       annotations:
-        sensu.io/update: "0"
+        sensu.io/update: "2"
     spec:
       volumes:
         - name: sensu-enterprise-defaults

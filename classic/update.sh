@@ -15,4 +15,5 @@ kubectl apply -f=deploy/sensu-enterprise/
 kubectl apply -f=deploy/daemonsets/
 kubectl apply -f=deploy/influxdb/
 kubectl apply -f=deploy/grafana/
-kubectl apply -f=deploy/dummy-backend/
+kubectl apply -f=deploy/network-device/
+kubectl apply -f=deploy/service-a/

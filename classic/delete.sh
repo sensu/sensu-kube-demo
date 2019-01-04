@@ -7,7 +7,8 @@ kubectl delete deployment sensu-enterprise-dashboard
 kubectl delete deployment sensu-redis
 kubectl delete deployment influxdb
 kubectl delete deployment grafana
-kubectl delete deployment dummy-backend
+kubectl delete deployment network-device
+kubectl delete deployment service-a
 kubectl delete configmap influxdb-config
 kubectl delete configmap grafana-provisioning-datasources
 kubectl delete configmap grafana-provisioning-dashboards
@@ -24,4 +25,5 @@ kubectl delete service sensu-enterprise-dashboard
 kubectl delete service sensu-redis
 kubectl delete service influxdb
 kubectl delete service grafana
-kubectl delete service dummy-backend
+kubectl delete service network-device
+kubectl delete service service-a
