@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "network-device-metrics": {
+      "type": "metric",
+      "command": "sensu-prometheus-collector -exporter-url http://localhost:8080/metrics",
+      "subscribers": ["network-device"],
+      "interval": 5,
+      "handler": "influxdb",
+      "output_format": "influxdb_line"
+    }
+  }
+}
