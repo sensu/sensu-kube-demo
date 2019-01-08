@@ -17,3 +17,4 @@ kubectl apply -f=deploy/influxdb/
 kubectl apply -f=deploy/grafana/
 kubectl apply -f=deploy/network-device/
 kubectl apply -f=deploy/service-a/
+kubectl apply -f=deploy/service-b/

@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-b
+spec:
+  replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: service-b
+      labels:
+        app: service-b
+    spec:
+      volumes:
+      - name: sensu-client-defaults
+        configMap:
+          name: sensu-client-defaults
+      containers:
+      - name: service-b
+        image: portertech/dummy:1.2.0
+        ports:
+        - protocol: TCP
+          containerPort: 8080
+      - name: sensu-client
+        image: sensuhq/sensu-classic-demo:1.5.0-1
+        resources:
+          requests:
+            cpu: 300m
+            memory: 300Mi
+        env:
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: SENSU_TRANSPORT_NAME
+          value: "redis"
+        - name: REDIS_URL
+          value: "redis://$(SENSU_REDIS_SERVICE_HOST):$(SENSU_REDIS_SERVICE_PORT)/0"
+        - name: RABBITMQ_URL
+          value: "amqp://sensu:supersecret@$(SENSU_RABBITMQ_SERVICE_HOST):$(SENSU_RABBITMQ_SERVICE_PORT)/%2Fsensu"
+        - name: SENSU_CLIENT_SUBSCRIPTIONS
+          value: "sidecar,service-b"
+        volumeMounts:
+        - name: sensu-client-defaults
+          mountPath: /etc/sensu/conf.d/
+        ports:
+        - containerPort: 3030
+      imagePullSecrets:
+        - name: docker-registry-creds
