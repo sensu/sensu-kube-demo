@@ -2,11 +2,11 @@
 
 kubectl delete clusterrolebinding kube-state-metrics
 kubectl delete clusterrole kube-state-metrics
-kubectl delete rolebinding kube-state-metrics
-kubectl delete role kube-state-metrics
-kubectl delete serviceaccount kube-state-metrics
-kubectl delete deployment kube-state-metrics
-kubectl delete service kube-state-metrics
+kubectl delete rolebinding kube-state-metrics --namespace kube-system
+kubectl delete role kube-state-metrics-resizer --namespace kube-system
+kubectl delete serviceaccount kube-state-metrics --namespace kube-system
+kubectl delete deployment kube-state-metrics --namespace kube-system
+kubectl delete service kube-state-metrics --namespace kube-system
 
 kubectl delete statefulset network-device
 kubectl delete daemonset sensu-client
