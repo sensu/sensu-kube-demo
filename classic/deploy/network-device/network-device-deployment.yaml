@@ -44,7 +44,7 @@ spec:
         - name: RABBITMQ_URL
           value: "amqp://sensu:supersecret@$(SENSU_RABBITMQ_SERVICE_HOST):$(SENSU_RABBITMQ_SERVICE_PORT)/%2Fsensu"
         - name: SENSU_CLIENT_SUBSCRIPTIONS
-          value: "sidecar,network-devices"
+          value: "sidecar,network-device"
         volumeMounts:
         - name: sensu-client-defaults
           mountPath: /etc/sensu/conf.d/

@@ -4,6 +4,9 @@
     "username": "Sensu",
     "icon_url": "http://www.gravatar.com/avatar/9b37917076cee4e2d331a785f3426640",
     "channel": "#demo",
-    "timeout": 10
+    "timeout": 10,
+    "filters": [
+      "check_dependencies"
+    ]
   }
 }

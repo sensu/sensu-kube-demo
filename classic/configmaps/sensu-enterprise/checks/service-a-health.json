@@ -4,7 +4,10 @@
       "command": "/usr/lib64/nagios/plugins/check_http -N -H localhost -p 8080 -u /healthz",
       "subscribers": ["service-a"],
       "interval": 5,
-      "handler": "slack"
+      "handler": "slack",
+      "dependencies": [
+        "network-device-health"
+      ]
     }
   }
 }
