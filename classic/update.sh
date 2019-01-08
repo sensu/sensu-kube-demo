@@ -17,3 +17,4 @@ kubectl apply -f=deploy/influxdb/
 kubectl apply -f=deploy/grafana/
 kubectl apply -f=deploy/network-device/
 kubectl apply -f=deploy/service-a/
+kubectl patch deployment sensu-enterprise --patch "{\"spec\": {\"template\": {\"metadata\": {\"labels\": {\"timestamp\": \"$(date +%s)\"}}}}}"
