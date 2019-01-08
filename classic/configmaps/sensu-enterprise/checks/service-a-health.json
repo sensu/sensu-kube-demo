@@ -1,11 +1,16 @@
 {
   "checks": {
     "service-a-health": {
+      "type": "metric",
       "command": "/usr/lib64/nagios/plugins/check_http -N -H localhost -p 8080 -u /healthz",
       "subscribers": ["service-a"],
       "interval": 5,
       "refresh": 60,
-      "handler": "slack",
+      "handlers": [
+        "slack",
+        "influxdb"
+      ],
+      "output_format": "nagios_perfdata",
       "dependencies": [
         "network-device-0/network-device-health"
       ]

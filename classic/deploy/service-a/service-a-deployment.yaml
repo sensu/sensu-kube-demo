@@ -50,13 +50,5 @@ spec:
           mountPath: /etc/sensu/conf.d/
         ports:
         - containerPort: 3030
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          initialDelaySeconds: 300
-          periodSeconds: 60
-          timeoutSeconds: 5
-          failureThreshold: 3
       imagePullSecrets:
         - name: docker-registry-creds

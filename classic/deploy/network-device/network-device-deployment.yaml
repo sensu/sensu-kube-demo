@@ -1,15 +1,19 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: network-device
 spec:
+  serviceName: network-device
   replicas: 1
-  minReadySeconds: 5
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: network-device
+  # minReadySeconds: 5
+  # strategy:
+  #   type: RollingUpdate
+  #   rollingUpdate:
+  #     maxSurge: 1
+  #     maxUnavailable: 0
   template:
     metadata:
       name: network-device
@@ -50,13 +54,5 @@ spec:
           mountPath: /etc/sensu/conf.d/
         ports:
         - containerPort: 3030
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          initialDelaySeconds: 300
-          periodSeconds: 60
-          timeoutSeconds: 5
-          failureThreshold: 3
       imagePullSecrets:
         - name: docker-registry-creds

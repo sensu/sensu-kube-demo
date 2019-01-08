@@ -1,5 +1,14 @@
 #!/bin/sh
 
+kubectl delete clusterrolebinding kube-state-metrics
+kubectl delete clusterrole kube-state-metrics
+kubectl delete rolebinding kube-state-metrics
+kubectl delete role kube-state-metrics
+kubectl delete serviceaccount kube-state-metrics
+kubectl delete deployment kube-state-metrics
+kubectl delete service kube-state-metrics
+
+kubectl delete statefulset network-device
 kubectl delete daemonset sensu-client
 kubectl delete daemonset node-exporter
 kubectl delete deployment sensu-enterprise
@@ -7,7 +16,6 @@ kubectl delete deployment sensu-enterprise-dashboard
 kubectl delete deployment sensu-redis
 kubectl delete deployment influxdb
 kubectl delete deployment grafana
-kubectl delete statefulset network-device
 kubectl delete deployment service-a
 kubectl delete deployment service-b
 kubectl delete configmap influxdb-config

@@ -11,6 +11,7 @@ kubectl create configmap sensu-enterprise-integrations --from-file=configmaps/se
 kubectl create configmap sensu-enterprise-dashboard-config --from-file=configmaps/sensu-enterprise-dashboard/dashboard.json
 kubectl create configmap sensu-client-defaults --from-file=configmaps/sensu-client/defaults.json
 kubectl create configmap sensu-client-daemonset --from-file=configmaps/sensu-client/daemonsets.json
+kubectl apply -f=deploy/kube-state-metrics/kubernetes/
 kubectl apply -f=deploy/sensu-enterprise/
 kubectl apply -f=deploy/daemonsets/
 kubectl apply -f=deploy/influxdb/
