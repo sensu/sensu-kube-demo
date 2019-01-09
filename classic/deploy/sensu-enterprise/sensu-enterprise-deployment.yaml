@@ -46,6 +46,7 @@ spec:
       containers:
         - name: sensu-enterprise
           image: sensuhq/sensu-classic-enterprise-demo:3.2.2-1 # Private image - request access
+          imagePullPolicy: Always
           env:
             - name: SENSU_API_PORT
               value: "4567"
