@@ -39,6 +39,10 @@ spec:
           configMap:
             name: sensu-enterprise-integrations
             optional: true
+        - name: sensu-enterprise-contacts
+          configMap:
+            name: sensu-enterprise-contacts
+            optional: true
       containers:
         - name: sensu-enterprise
           image: sensuhq/sensu-classic-enterprise-demo:3.2.2-1 # Private image - request access
@@ -60,6 +64,8 @@ spec:
               mountPath: /etc/sensu/conf.d/handlers
             - name: sensu-enterprise-integrations
               mountPath: /etc/sensu/conf.d/integrations
+            - name: sensu-enterprise-contacts
+              mountPath: /etc/sensu/conf.d/contacts
           ports:
             - containerPort: 4567
           readinessProbe:
