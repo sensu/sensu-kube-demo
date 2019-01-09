@@ -1,0 +1,12 @@
+{
+  "contacts": {
+    "team-b": {
+      "email": {
+        "to": "support@sensuapp.com"
+      },
+      "slack": {
+        "channel": "#service_b"
+      }
+    }
+  }
+}

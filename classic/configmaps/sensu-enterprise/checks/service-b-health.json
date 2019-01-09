@@ -10,6 +10,7 @@
         "slack",
         "influxdb"
       ],
+      "contacts": ["team-b"],
       "output_format": "nagios_perfdata"
     }
   }
