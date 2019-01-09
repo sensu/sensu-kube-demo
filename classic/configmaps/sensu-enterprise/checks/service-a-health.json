@@ -8,13 +8,20 @@
       "refresh": 60,
       "handlers": [
         "slack",
-        "influxdb"
+        "influxdb",
+        "remediation"
       ],
       "contacts": ["team-a"],
       "output_format": "nagios_perfdata",
       "dependencies": [
         "network-device-0/network-device-health"
-      ]
+      ],
+      "remediation": {
+        "service-a-remediation": {
+          "occurrences": ["6+"],
+          "severities": [1,2]
+        }
+      }
     }
   }
 }

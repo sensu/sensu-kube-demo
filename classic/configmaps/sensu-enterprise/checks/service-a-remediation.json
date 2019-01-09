@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "service-a-remediation": {
+      "command": "curl -XPOST localhost:8080/healthz",
+      "publish": false,
+      "subscribers": [],
+      "handlers": [
+        "slack"
+      ],
+      "contacts": ["team-a"]
+    }
+  }
+}

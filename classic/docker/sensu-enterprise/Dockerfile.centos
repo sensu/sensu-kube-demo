@@ -8,13 +8,14 @@ name=sensu\n\
 baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/\n\
 gpgkey=https://repositories.sensuapp.org/yum/pubkey.gpg\n\
 gpgcheck=1\n\
-enabled=1' | tee /etc/yum.repos.d/sensu.repo
-
-RUN yum install -y sensu-${sensu_release}.el7.x86_64
-
-# Cleanup
-RUN rm -rf /opt/sensu/embedded/lib/ruby/gems/2.4.0/{cache,doc}/* && \
-    find /opt/sensu/embedded/lib/ruby/gems/ -name "*.o" -delete
+enabled=1' | tee /etc/yum.repos.d/sensu.repo && \
+  yum install -y sensu-${sensu_release}.el7.x86_64 && \
+  rm -rf /opt/sensu/embedded/lib/ruby/gems/2.4.0/{cache,doc}/* && \
+  find /opt/sensu/embedded/lib/ruby/gems/ -name "*.o" -delete
+RUN \
+  yum groupinstall -y "Development Tools" && \
+  sensu-install -p sensu && \
+  yum groupremove -y "Development Tools"
 
 ADD deregistration.rb /etc/sensu/plugins/
 ADD deregistration_kubernetes.rb /etc/sensu/plugins/
