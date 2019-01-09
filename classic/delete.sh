@@ -26,6 +26,7 @@ kubectl delete configmap sensu-enterprise-defaults
 kubectl delete configmap sensu-enterprise-checks
 kubectl delete configmap sensu-enterprise-handlers
 kubectl delete configmap sensu-enterprise-integrations
+kubectl delete configmap sensu-enterprise-contacts
 kubectl delete configmap sensu-enterprise-dashboard-config
 kubectl delete configmap sensu-client-defaults
 kubectl delete configmap sensu-client-daemonset

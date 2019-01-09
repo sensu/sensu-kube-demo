@@ -8,6 +8,7 @@ kubectl create configmap sensu-enterprise-defaults --from-file=configmaps/sensu-
 kubectl create configmap sensu-enterprise-checks --from-file=configmaps/sensu-enterprise/checks/
 kubectl create configmap sensu-enterprise-handlers --from-file=configmaps/sensu-enterprise/handlers/
 kubectl create configmap sensu-enterprise-integrations --from-file=configmaps/sensu-enterprise/integrations/
+kubectl create configmap sensu-enterprise-contacts --from-file=configmaps/sensu-enterprise/contacts/
 kubectl create configmap sensu-enterprise-dashboard-config --from-file=configmaps/sensu-enterprise-dashboard/dashboard.json
 kubectl create configmap sensu-client-defaults --from-file=configmaps/sensu-client/defaults.json
 kubectl create configmap sensu-client-daemonset --from-file=configmaps/sensu-client/daemonsets.json
