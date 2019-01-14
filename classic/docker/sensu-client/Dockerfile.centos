@@ -7,8 +7,5 @@ RUN \
 
 FROM sensu/sensu-classic:1.5.0-1
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm && \
-  yum install -y nagios-plugins-http nagios-plugins-ping && \
-  yum groupinstall -y "Development Tools" && \
-  sensu-install -p sensu && \
-  yum groupremove -y "Development Tools"
+  yum install -y nagios-plugins-http nagios-plugins-ping 
 COPY --from=builder /usr/bin/sensu-prometheus-collector /usr/bin/sensu-prometheus-collector
