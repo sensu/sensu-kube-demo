@@ -17,8 +17,16 @@
         "network-device-0/network-device-health"
       ],
       "remediation": {
-        "service-a-remediation": {
-          "occurrences": ["6+"],
+        "service-a-remediation1": {
+          "occurrences": ["6"],
+          "severities": [1,2]
+        },
+        "service-a-remediation2": {
+          "occurrences": ["7+"],
+          "severities": [1,2]
+        },
+        "service-a-remediation3": {
+          "occurrences": ["14+"],
           "severities": [1,2]
         }
       }

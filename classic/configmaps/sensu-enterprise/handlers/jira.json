@@ -1,0 +1,10 @@
+{
+  "jira": {
+    "host": "sensujira.atlassian.net",
+    "user": "matt.beninghof@sensu.io",
+    "password": "Ilovesensu2019",
+    "project": "sensu",
+    "issue_type": "Bug",
+    "timeout": 10
+  }
+}

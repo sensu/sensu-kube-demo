@@ -1,6 +1,24 @@
 {
   "checks": {
-    "service-a-remediation": {
+    "service-a-remediation1": {
+      "command": "curl -XGET localhost:8080/healthz",
+      "publish": false,
+      "subscribers": [],
+      "handlers": [
+        "slack"
+      ],
+      "contacts": ["team-a"]
+    },
+    "service-a-remediation2": {
+      "command": "curl -XGET localhost:8080/healthz",
+      "publish": false,
+      "subscribers": [],
+      "handlers": [
+        "slack"
+      ],
+      "contacts": ["team-a"]
+    },
+    "service-a-remediation3": {
       "command": "curl -XPOST localhost:8080/healthz",
       "publish": false,
       "subscribers": [],

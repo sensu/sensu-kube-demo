@@ -1,0 +1,22 @@
+{
+  "opsgenie": {
+    "api_key": "567c390c-6668-4770-aea1-f0aefacce25e",
+    "source": "Sensu Enterprise (GKE)",
+    "responders":[
+      {
+        "name":"afterhours",
+        "type":"schedule"
+      }
+    ],
+    "visible_to":[
+      {
+        "name":"ops",
+        "type":"team"
+      }
+    ],
+    "actions": ["ShowProcesses"],
+    "tags": ["production"],
+    "overwrite_quiet_hours": true,
+    "timeout": 10
+  }
+}

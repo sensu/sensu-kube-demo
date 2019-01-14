@@ -4,7 +4,8 @@
       "command": "/usr/lib64/nagios/plugins/check_http -N -H localhost -p 8080 -u /healthz",
       "subscribers": ["network-device"],
       "interval": 5,
-      "handler": "slack"
+      "handler": "slack",
+      "contacts": ["networkteam"]
     }
   }
 }

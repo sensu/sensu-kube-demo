@@ -1,0 +1,12 @@
+{
+  "contacts": {
+    "networkteam": {
+      "email": {
+        "to": "support@sensuapp.com"
+      },
+      "slack": {
+        "channel": "#network_device"
+      }
+    }
+  }
+}
