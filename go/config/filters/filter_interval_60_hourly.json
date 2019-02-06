@@ -1,0 +1,18 @@
+{
+  "type": "EventFilter",
+  "api_version": "core/v2",
+  "metadata": {
+    "name": "filter_interval_60_hourly",
+    "namespace": "demo",
+    "labels": null,
+    "annotations": null
+  },
+  "spec": {
+    "action": "allow",
+    "expressions": [
+      "event.check.interval == 60",
+      "event.check.occurrences == 1 || event.check.occurrences % 60 == 0"
+    ],
+    "runtime_assets": []
+  }
+}
