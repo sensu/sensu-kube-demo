@@ -11,4 +11,4 @@ spec:
   subscriptions:
   - proxy
   publish: true
-  interval: 10
+  interval: 60
