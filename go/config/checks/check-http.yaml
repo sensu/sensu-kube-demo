@@ -1,0 +1,14 @@
+api_version: core/v2
+type: CheckConfig
+metadata:
+  namespace: demo
+  name: check-http-google
+spec:
+  runtime_assets:
+  - check-plugins
+  command: check-http -u https://google.com -r true
+  proxy_entity_name: "google.com"
+  subscriptions:
+  - proxy
+  publish: true
+  interval: 60

@@ -1,0 +1,20 @@
+---
+api_version: core/v2
+type: CheckConfig
+metadata:
+  namespace: demo
+  name: check-http-proxy
+spec:
+  runtime_assets:
+  - check-plugins
+  command: check-http -u {{ .labels.url }} -r true
+  subscriptions:
+  - proxy
+  publish: true
+  interval: 60
+  proxy_requests:
+    entity_attributes:
+      - entity.entity_class == 'proxy'
+      - entity.labels.proxy_type == 'website'
+    splay: true
+    splay_coverage: 90

@@ -1,0 +1,35 @@
+---
+type: Entity
+api_version: core/v2
+metadata:
+  name: sensu-docs
+  namespace: demo
+  labels:
+    proxy_type: website
+    url: https://docs.sensu.io
+spec:
+  entity_class: proxy
+
+---
+type: Entity
+api_version: core/v2
+metadata:
+  name: sensu-site
+  namespace: demo
+  labels:
+    proxy_type: website
+    url: https://sensu.io
+spec:
+  entity_class: proxy
+
+---
+type: Entity
+api_version: core/v2
+metadata:
+  name: "google.com" 
+  namespace: demo
+  labels:
+    proxy_type: website
+    url: https://google.com
+spec:
+  entity_class: proxy
