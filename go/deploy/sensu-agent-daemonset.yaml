@@ -16,7 +16,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: sensu-agent
-          image: sensu/sensu:5.0.0
+          image: sensu/sensu:latest
           command: ["/opt/sensu/bin/sensu-agent", "start", "--log-level", "debug"]
           env:
             - name: HOST_IP

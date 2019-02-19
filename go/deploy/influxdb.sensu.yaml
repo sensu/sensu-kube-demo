@@ -37,7 +37,7 @@ spec:
             - name: INFLUXDB_USER_PASSWORD
               value: password
         - name: sensu-agent
-          image: sensu/sensu:5.0.0
+          image: sensu/sensu:latest
           command: ["/opt/sensu/bin/sensu-agent", "start", "--log-level", "debug"]
           env:
             - name: SENSU_BACKEND_URL
