@@ -7,7 +7,7 @@ spec:
   type: pipe
   runtime_assets:
   - slack-handler
-  command: sensu-slack-handler --channel '#demo' --timeout 20 --username 'sensu' --webhook-url 'SECRET'
+  command: sensu-slack-handler --channel '#demo' --timeout 20 --username 'sensu' --webhook-url 'https://hooks.slack.com/services/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' 
   timeout: 30
   filters:
   - is_incident
