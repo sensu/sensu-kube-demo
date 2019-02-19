@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: sensu-backend
-          image: sensu/sensu::latest
+          image: sensu/sensu:latest
           command: ["/opt/sensu/bin/sensu-backend", "start", "--log-level", "debug"]
           ports:
             - protocol: TCP
