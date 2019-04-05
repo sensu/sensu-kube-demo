@@ -1,5 +1,7 @@
 # Sensu Kubernetes Monitoring Demo
 
+See the [Sensu docs](https://docs.sensu.io/sensu-go/latest/getting-started/sample-app/) for a tutorial using this demo.
+
 ## Prerequisites
 
 - Kubernetes
