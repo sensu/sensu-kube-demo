@@ -1,6 +1,4 @@
-# Sensu Kubernetes Monitoring Demo
-
-See the [Sensu docs](https://docs.sensu.io/sensu-go/latest/getting-started/sample-app/) for a tutorial using this demo.
+**THIS PROJECT IS NO LONGER SUPPORTED; PLEASE SEE https://github.com/sensu/sensu-k8s-quick-start FOR NEWER EXAMPLES**
 
 ## Prerequisites
 
